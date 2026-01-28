@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Test Extractor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏥 Lab Test Extractor</h1>
+      <p class="subtitle">Hulhumale Hospital Portal</p>
+    </div>
+
+    <div class="status" id="status">
+      <p>Click "Extract Data" to begin</p>
+    </div>
+
+    <div class="actions">
+      <button id="extractBtn" class="btn btn-primary">
+        📊 Extract Data
+      </button>
+      <button id="copyBtn" class="btn btn-success" disabled>
+        📋 Copy Text
+      </button>
+    </div>
+
+    <div class="results" id="results">
+      <pre id="output">No data extracted yet</pre>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Lab Test Data Extractor",
+  "version": "4.1.0",
+  "description": "Extract lab test results from Hulhumale Hospital portal",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://dharaka.hmh.mv/*",
+    "http://dharaka.hmh.mv/*",
+    "*://dharaka.hmh.mv/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Lab Test Extractor"
+  }
+}

@@ -1,0 +1,25 @@
+LAB TEST RESULTS
+═══════════════════════════════════
+
+COMPLETE HEMOGRAM
+  RBC: 5.73
+  HB: WNL
+  HCT (PCV): 47.7
+  MCV: WNL
+  MCH: WNL
+  MCHC: WNL
+  RDW: WNL
+  WBC: 11.9
+
+DIFFERENTIAL COUNT
+  Neutrophils: WNL
+  Lymphocytes: WNL
+  Monocytes: 13.0
+  Eosinophils: 7.9
+  Basophils: 0.7
+
+INFLAMMATORY MARKERS
+  C-REACTIVE PROTEIN: WNL
+
+OTHER TESTS
+  NRBC: 0.00
