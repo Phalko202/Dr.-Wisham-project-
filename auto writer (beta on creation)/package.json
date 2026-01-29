@@ -1,0 +1,41 @@
+{
+  "name": "vinavi-autowriter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Draft + review + assisted form-filling for Vinavi clinical notes",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "electron .",
+    "lint": "node ./scripts/selfcheck.js",
+    "pack:win": "electron-builder --win --x64",
+    "dist:win": "electron-builder --win --x64 --publish never"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "electron": "^30.0.0",
+    "openai": "^4.70.0",
+    "playwright": "^1.49.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "mv.aasandha.vinavi.autowriter",
+    "productName": "Vinavi AutoWriter",
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "config/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  }
+}

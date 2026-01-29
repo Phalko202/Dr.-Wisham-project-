@@ -1,0 +1,36 @@
+{
+  "portalUrl": "https://vinavi.aasandha.mv",
+  "loggedInUrlIncludes": "vinavi.aasandha.mv",
+
+  "patientSearch": {
+    "selector": "",
+    "labelRegex": "(patient|id card|idcard|national id|search)"
+  },
+
+  "fields": {
+    "complaint": {
+      "selector": "",
+      "labelRegex": "(complaint|chief complaint|presenting complaint)"
+    },
+    "history": {
+      "selector": "",
+      "labelRegex": "(history|hpi|present illness)"
+    },
+    "assessment": {
+      "selector": "",
+      "labelRegex": "(assessment|diagnosis|impression)"
+    },
+    "medications": {
+      "selector": "",
+      "labelRegex": "(medication|medicine|rx|prescription)"
+    },
+    "advice": {
+      "selector": "",
+      "labelRegex": "(advice|counsel|counselling|education)"
+    },
+    "services": {
+      "selector": "",
+      "labelRegex": "(services|procedure|investigation|lab|radiology)"
+    }
+  }
+}

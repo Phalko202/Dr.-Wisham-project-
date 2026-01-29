@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinavi AutoWriter Lite (No Install)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <div class="title">Vinavi AutoWriter Lite</div>
+          <div class="subtitle">Runs as a local HTML file • No install • No automation • Safe draft + paste-in history summary</div>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <div class="card-title">Draft Note (template-based)</div>
+          <div class="form">
+            <label>
+              <span>ID Card (optional)</span>
+              <input id="idCard" placeholder="e.g., A123456" />
+            </label>
+            <div class="row">
+              <label>
+                <span>Age</span>
+                <input id="age" placeholder="e.g., 34" />
+              </label>
+              <label>
+                <span>Sex</span>
+                <select id="sex">
+                  <option value="">—</option>
+                  <option value="F">F</option>
+                  <option value="M">M</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              <span>Doctor free notes</span>
+              <textarea id="freeNotes" rows="7" placeholder="Type what you want documented (symptoms, duration, exam, plan)..."></textarea>
+            </label>
+            <label>
+              <span>Constraints / preferences</span>
+              <input id="constraints" placeholder="e.g., Avoid antibiotics unless indicated" />
+            </label>
+            <button id="btnDraft" class="btn primary">Generate draft</button>
+            <label>
+              <span>Draft output (copy/paste into Vinavi manually)</span>
+              <textarea id="draft" rows="10"></textarea>
+            </label>
+            <div class="hint">This mode does not type into Vinavi. It only helps you draft text safely.</div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-title">History Summary (paste episode text)</div>
+          <div class="form">
+            <label>
+              <span>Paste raw episode text (from Vinavi VIEW pages)</span>
+              <textarea id="episodes" rows="12" placeholder="Paste here. You can paste multiple episodes; include dates if possible."></textarea>
+            </label>
+            <div class="row">
+              <button id="btnExtract" class="btn primary">Extract comorbidities + meds</button>
+              <button id="btnClear" class="btn ghost">Clear</button>
+            </div>
+            <label>
+              <span>Extracted summary</span>
+              <textarea id="summary" rows="8" readonly></textarea>
+            </label>
+
+            <div class="divider"></div>
+
+            <label>
+              <span>Ask a question (offline heuristics)</span>
+              <input id="question" placeholder="e.g., What comorbidities? HTN meds changed?" />
+            </label>
+            <button id="btnAsk" class="btn accent">Answer</button>
+            <label>
+              <span>Answer</span>
+              <textarea id="answer" rows="6" readonly></textarea>
+            </label>
+
+            <div class="hint">
+              Answers are heuristic (non-AI). If you need AI Q&A, you’ll need an approved tool or IT-approved install.
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        If your hospital IT can whitelist an EXE, the full app can automate and scrape read-only without copy/paste.
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

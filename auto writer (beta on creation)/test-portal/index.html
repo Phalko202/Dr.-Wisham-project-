@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinavi Test Portal (Safe)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="topbar">
+        <div>
+          <div class="brand">Vinavi Test Portal</div>
+          <div class="sub">LOCAL ONLY • Safe for automation testing • No real patient data</div>
+        </div>
+        <div class="right">
+          <label class="toggle">
+            <input id="autosave" type="checkbox" checked />
+            <span>Autosave simulation</span>
+          </label>
+          <button id="reset" class="btn ghost">Reset</button>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="card" id="screenLogin">
+          <div class="title">Login (simulated)</div>
+          <div class="form">
+            <label>
+              <span>Username</span>
+              <input id="username" placeholder="doctor" />
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="password" type="password" placeholder="••••••••" />
+            </label>
+            <button id="login" class="btn primary">Login</button>
+            <div class="hint">This is a fake login. Any credentials are accepted.</div>
+          </div>
+        </section>
+
+        <section class="card" id="screenSearch" hidden>
+          <div class="title">Patient Search</div>
+          <div class="form">
+            <label>
+              <span>Patient / ID Card Search</span>
+              <input id="patientSearch" placeholder="Type ID card and press Enter" />
+            </label>
+            <div class="row">
+              <button id="btnLoad" class="btn primary">Load patient</button>
+              <div class="pill" id="patientBadge">No patient loaded</div>
+            </div>
+            <div class="hint">Automation should fill this field, then press Enter.</div>
+          </div>
+        </section>
+
+        <section class="card" id="screenRecord" hidden>
+          <div class="title">Clinical Note (test fields)</div>
+          <div class="form">
+            <label>
+              <span>Chief Complaint</span>
+              <textarea id="fieldComplaint" rows="3" placeholder="e.g., fever, headache"></textarea>
+            </label>
+            <label>
+              <span>History of Present Illness</span>
+              <textarea id="fieldHistory" rows="3"></textarea>
+            </label>
+            <label>
+              <span>Assessment / Diagnosis</span>
+              <textarea id="fieldAssessment" rows="3"></textarea>
+            </label>
+            <label>
+              <span>Medications / Prescription</span>
+              <textarea id="fieldMedications" rows="3"></textarea>
+            </label>
+            <label>
+              <span>Medical Advice</span>
+              <textarea id="fieldAdvice" rows="3"></textarea>
+            </label>
+            <label>
+              <span>Other Services</span>
+              <textarea id="fieldServices" rows="3"></textarea>
+            </label>
+
+            <div class="row">
+              <button id="btnFakeSave" class="btn accent">Simulate Save</button>
+              <button id="btnClear" class="btn ghost">Clear fields</button>
+            </div>
+
+            <div class="hint">
+              If autosave is enabled, typing will append to the “Saved History Log” below.
+              This mimics the risk you described, but it’s local and safe.
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="title">Saved History Log (simulation)</div>
+          <pre id="log" class="log"></pre>
+        </section>
+      </main>
+
+      <footer class="footer">
+        Tip: This portal is meant to validate selectors + filling behavior safely.
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

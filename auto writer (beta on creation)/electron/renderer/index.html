@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinavi AutoWriter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <div class="title">Vinavi AutoWriter</div>
+          <div class="subtitle">Draft → Review → Assistively fill Vinavi (no auto-submit)</div>
+        </div>
+        <div class="header-actions">
+          <select id="profile" class="select">
+            <option value="test">Test Portal (safe)</option>
+            <option value="vinavi">Vinavi (real)</option>
+          </select>
+          <button id="btnConfig" class="btn btn-ghost">Mapping config</button>
+          <button id="btnOpen" class="btn btn-primary">Open Vinavi</button>
+          <button id="btnDiagnose" class="btn btn-ghost">Diagnose page</button>
+          <button id="btnClose" class="btn btn-ghost">Close browser</button>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <div class="card-title">Patient + Context</div>
+          <div class="form">
+            <label>
+              <span>ID Card</span>
+              <input id="idCard" placeholder="e.g., A123456" />
+            </label>
+            <div class="row">
+              <label>
+                <span>Age</span>
+                <input id="age" placeholder="e.g., 34" />
+              </label>
+              <label>
+                <span>Sex</span>
+                <select id="sex">
+                  <option value="">—</option>
+                  <option value="F">F</option>
+                  <option value="M">M</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              <span>Free notes (what the doctor wants)</span>
+              <textarea id="freeNotes" rows="7" placeholder="Example: Patient complains of... Examination... Plan..."></textarea>
+            </label>
+            <label>
+              <span>Constraints / preferences</span>
+              <input id="constraints" placeholder="e.g., Avoid sedation; prefers once-daily meds" />
+            </label>
+
+            <div class="row">
+              <button id="btnDraft" class="btn btn-primary">Generate draft</button>
+              <label class="checkbox">
+                <input id="reviewed" type="checkbox" />
+                <span>I reviewed/edited this draft</span>
+              </label>
+            </div>
+
+            <div class="hint">
+              AI drafts must be reviewed by a clinician. Don’t include unnecessary identifiers.
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-title">Draft (editable)</div>
+          <div class="form">
+            <label>
+              <span>Complaint</span>
+              <textarea id="complaint" rows="4"></textarea>
+            </label>
+            <label>
+              <span>History</span>
+              <textarea id="history" rows="4"></textarea>
+            </label>
+            <label>
+              <span>Assessment</span>
+              <textarea id="assessment" rows="4"></textarea>
+            </label>
+            <label>
+              <span>Medications</span>
+              <textarea id="medications" rows="4"></textarea>
+            </label>
+            <label>
+              <span>Advice</span>
+              <textarea id="advice" rows="4"></textarea>
+            </label>
+            <label>
+              <span>Services</span>
+              <textarea id="services" rows="4"></textarea>
+            </label>
+
+            <div class="row">
+              <button id="btnFill" class="btn btn-accent">Fill into Vinavi</button>
+              <button id="btnClear" class="btn btn-ghost">Clear draft</button>
+            </div>
+
+            <div id="status" class="status">Status: idle</div>
+            <details class="details">
+              <summary>Diagnostics (for mapping selectors)</summary>
+              <pre id="diag" class="diag"></pre>
+            </details>
+
+            <div class="divider"></div>
+
+            <div class="card-title">Read-only History + Q&A</div>
+            <div class="row">
+              <label>
+                <span>Episodes to fetch</span>
+                <input id="epLimit" value="8" />
+              </label>
+              <button id="btnFetch" class="btn btn-primary">Fetch episodes</button>
+            </div>
+            <label>
+              <span>Extracted history (preview)</span>
+              <textarea id="historyDump" rows="6" placeholder="Fetched episode text preview appears here..."></textarea>
+            </label>
+            <label>
+              <span>Ask a question</span>
+              <input id="question" placeholder="e.g., What comorbidities does the patient have? Any HTN med changes?" />
+            </label>
+            <button id="btnAsk" class="btn btn-accent">Answer from history</button>
+            <label>
+              <span>Answer</span>
+              <textarea id="answer" rows="6" readonly></textarea>
+            </label>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>
+          Tip: open Vinavi first, login manually in the browser, then fill.
+        </div>
+        <div class="small">
+          This tool does not auto-submit. You remain responsible for clinical decisions.
+        </div>
+      </footer>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

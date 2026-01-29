@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Vinavi AutoWriter",
+  "version": "0.2.0",
+  "description": "Side-panel assistant for drafting, read-only history scraping, and mapped form filling in Vinavi (manual login required).",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://vinavi.aasandha.mv/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://vinavi.aasandha.mv/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Vinavi AutoWriter",
+    "default_popup": "popup.html"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "options_page": "options.html"
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vinavi AutoWriter</title>
+    <link rel="stylesheet" href="ui.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <div class="title">Vinavi AutoWriter</div>
+          <div class="sub">Manual login • Read-only scraping • Mapped fill</div>
+        </div>
+        <div class="row">
+          <button id="btnOptions" class="btn ghost">Options</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="cardTitle">Patient Search</div>
+        <div class="form">
+          <label>
+            <span>ID Card</span>
+            <input id="idCard" placeholder="e.g., A123456" />
+          </label>
+          <div class="row">
+            <button id="btnSearch" class="btn primary">Search in Vinavi</button>
+            <button id="btnDiagnose" class="btn ghost">Diagnose</button>
+          </div>
+          <pre id="diag" class="pre"></pre>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardTitle">Draft (paste or type)</div>
+        <div class="form">
+          <label><span>Complaint</span><textarea id="complaint" rows="2"></textarea></label>
+          <label><span>History</span><textarea id="history" rows="2"></textarea></label>
+          <label><span>Assessment</span><textarea id="assessment" rows="2"></textarea></label>
+          <label><span>Medications</span><textarea id="medications" rows="2"></textarea></label>
+          <label><span>Advice</span><textarea id="advice" rows="2"></textarea></label>
+          <label><span>Services</span><textarea id="services" rows="2"></textarea></label>
+          <label class="check">
+            <input id="reviewed" type="checkbox" />
+            <span>I reviewed this</span>
+          </label>
+          <button id="btnFill" class="btn accent">Fill mapped fields</button>
+          <div class="hint">No auto-submit. Filling depends on selectors in Options.</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardTitle">Read-only History</div>
+        <div class="form">
+          <div class="row">
+            <label>
+              <span>Episodes</span>
+              <input id="epLimit" value="8" />
+            </label>
+            <button id="btnFetch" class="btn primary">Fetch</button>
+          </div>
+          <label><span>Preview</span><textarea id="historyDump" rows="7"></textarea></label>
+          <label><span>Question</span><input id="question" placeholder="e.g., HTN meds changed?" /></label>
+          <button id="btnAsk" class="btn accent">Ask (AI optional)</button>
+          <label><span>Answer</span><textarea id="answer" rows="6" readonly></textarea></label>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div id="status" class="status">Status: idle</div>
+      </footer>
+    </div>
+
+    <script type="module" src="sidepanel.js"></script>
+  </body>
+</html>

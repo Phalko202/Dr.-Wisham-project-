@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vinavi AutoWriter Options</title>
+    <link rel="stylesheet" href="ui.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <div class="title">Options</div>
+          <div class="sub">Set selectors/labels for your Vinavi portal</div>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="cardTitle">Mapping</div>
+        <div class="form">
+          <label><span>Patient Search Selector</span><input id="patientSearchSelector" placeholder="#patientSearch" /></label>
+          <label><span>Patient Search Label Regex</span><input id="patientSearchLabelRegex" /></label>
+
+          <div class="row">
+            <label><span>Complaint Selector</span><input id="complaintSelector" /></label>
+            <label><span>Complaint Label Regex</span><input id="complaintLabelRegex" /></label>
+          </div>
+
+          <div class="row">
+            <label><span>History Selector</span><input id="historySelector" /></label>
+            <label><span>History Label Regex</span><input id="historyLabelRegex" /></label>
+          </div>
+
+          <div class="row">
+            <label><span>Assessment Selector</span><input id="assessmentSelector" /></label>
+            <label><span>Assessment Label Regex</span><input id="assessmentLabelRegex" /></label>
+          </div>
+
+          <div class="row">
+            <label><span>Medications Selector</span><input id="medicationsSelector" /></label>
+            <label><span>Medications Label Regex</span><input id="medicationsLabelRegex" /></label>
+          </div>
+
+          <div class="row">
+            <label><span>Advice Selector</span><input id="adviceSelector" /></label>
+            <label><span>Advice Label Regex</span><input id="adviceLabelRegex" /></label>
+          </div>
+
+          <div class="row">
+            <label><span>Services Selector</span><input id="servicesSelector" /></label>
+            <label><span>Services Label Regex</span><input id="servicesLabelRegex" /></label>
+          </div>
+
+          <div class="row">
+            <label><span>VIEW Label (episodes)</span><input id="viewLabel" /></label>
+            <label><span>Episode Text Selector</span><input id="episodeTextSelector" placeholder="body" /></label>
+          </div>
+
+          <button id="save" class="btn primary">Save</button>
+          <div id="status" class="status">Status: idle</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardTitle">AI (optional)</div>
+        <div class="form">
+          <label><span>OpenAI API Key</span><input id="openaiApiKey" placeholder="sk-..." /></label>
+          <label><span>Model</span><input id="aiModel" /></label>
+          <div class="hint">If hospital network blocks external APIs, leave this blank and use manual review.</div>
+        </div>
+      </section>
+
+      <script type="module" src="options.js"></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "idCard": "A123456",
+  "sex": "F",
+  "age": 34,
+  "chiefComplaint": "Fever and sore throat for 2 days",
+  "history": "No SOB. No chest pain. No known drug allergies. No significant PMH.",
+  "vitals": "Temp 38.2 C",
+  "exam": "Pharyngeal erythema",
+  "knownMeds": "None",
+  "constraints": "Avoid antibiotics unless clearly indicated"
+}

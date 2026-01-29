@@ -1,0 +1,18 @@
+{
+  "portalUrl": "local:test-portal/index.html",
+  "loggedInUrlIncludes": "",
+
+  "patientSearch": {
+    "selector": "#patientSearch",
+    "labelRegex": "(patient|id card|idcard|search)"
+  },
+
+  "fields": {
+    "complaint": { "selector": "#fieldComplaint" },
+    "history": { "selector": "#fieldHistory" },
+    "assessment": { "selector": "#fieldAssessment" },
+    "medications": { "selector": "#fieldMedications" },
+    "advice": { "selector": "#fieldAdvice" },
+    "services": { "selector": "#fieldServices" }
+  }
+}
