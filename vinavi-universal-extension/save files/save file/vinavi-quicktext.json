@@ -1,0 +1,358 @@
+{
+  "exportedAt": "2026-01-27T09:13:06.638Z",
+  "type": "vinavi-quicktext",
+  "version": 1,
+  "data": {
+    "customTemplates": {
+      "/enterlabs": {
+        "category": "other",
+        "icon": "📋",
+        "layout": "columns-2",
+        "mainLabels": [
+          {
+            "name": "Complete Hemogram",
+            "subLabels": [
+              {
+                "default": "",
+                "id": "complete-hemogram__hb__0_0",
+                "label": "HB",
+                "type": "number",
+                "unit": "g/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "complete-hemogram__rbc__0_1",
+                "label": "RBC",
+                "type": "number",
+                "unit": "10^6/uL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "complete-hemogram__hct-pcv__0_2",
+                "label": "HCT (PCV)",
+                "type": "number",
+                "unit": "%",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "complete-hemogram__mcv__0_3",
+                "label": "MCV",
+                "type": "number",
+                "unit": "fL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "complete-hemogram__mch__0_4",
+                "label": "MCH",
+                "type": "number",
+                "unit": "pg",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "complete-hemogram__rdw__0_5",
+                "label": "RDW",
+                "type": "number",
+                "unit": "%",
+                "width": "half"
+              }
+            ]
+          },
+          {
+            "name": "Inflammatory profile",
+            "subLabels": [
+              {
+                "default": "",
+                "id": "inflammatory-profile__c-reactive-protein-crp__1_0",
+                "label": "C-REACTIVE PROTEIN (CRP)",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "inflammatory-profile__erythrocyte-sedimentation-rate-esr__1_1",
+                "label": "Erythrocyte sedimentation rate (ESR)",
+                "type": "number",
+                "unit": "mm/hour",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "inflammatory-profile__rheumatoid-factor-quantitative__1_2",
+                "label": "Rheumatoid factor (Quantitative)",
+                "type": "number",
+                "unit": "U/mL",
+                "width": "half"
+              }
+            ]
+          },
+          {
+            "name": "liver profile",
+            "subLabels": [
+              {
+                "default": "",
+                "id": "liver-profile__total-bilirubin__2_0",
+                "label": "TOTAL BILIRUBIN",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__direct-bilirubin__2_1",
+                "label": "DIRECT BILIRUBIN",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__total-protein__2_2",
+                "label": "TOTAL PROTEIN",
+                "type": "number",
+                "unit": "g/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__albumim__2_3",
+                "label": "Albumim",
+                "type": "number",
+                "unit": "g/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__globulin__2_4",
+                "label": "GLOBULIN",
+                "type": "number",
+                "unit": "g/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__alkaline-phosphatase__2_5",
+                "label": "ALKALINE PHOSPHATASE",
+                "type": "number",
+                "unit": "U/L",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__ast-sgot__2_6",
+                "label": "AST(SGOT)",
+                "type": "number",
+                "unit": "U/L",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__alt-sgpt__2_7",
+                "label": "ALT(SGPT)",
+                "type": "number",
+                "unit": "U/L",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "liver-profile__ggt__2_8",
+                "label": "GGT",
+                "type": "number",
+                "unit": "U/L",
+                "width": "half"
+              }
+            ]
+          },
+          {
+            "name": "Renal profile",
+            "subLabels": [
+              {
+                "default": "",
+                "id": "renal-profile__urea__3_0",
+                "label": "UREA",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "renal-profile__bun__3_1",
+                "label": "BUN",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "renal-profile__creatinine__3_2",
+                "label": "Creatinine",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "renal-profile__uric-acid__3_3",
+                "label": "URIC ACID",
+                "type": "number",
+                "unit": "mg/dL",
+                "width": "half"
+              }
+            ]
+          },
+          {
+            "name": "Electrolytes",
+            "subLabels": [
+              {
+                "default": "",
+                "id": "electrolytes__sodium-na__4_0",
+                "label": "Sodium (Na+)",
+                "type": "number",
+                "unit": "mmol/L",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "electrolytes__potassium-k__4_1",
+                "label": "Potassium (K+)",
+                "type": "number",
+                "unit": "mmol/L",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "electrolytes__iron__4_2",
+                "label": "IRON",
+                "type": "number",
+                "unit": "µg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "electrolytes__serum-tibc__4_3",
+                "label": "SERUM TIBC",
+                "type": "number",
+                "unit": "µg/dL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "electrolytes__vitamin-d__4_4",
+                "label": "Vitamin D",
+                "type": "number",
+                "unit": "ng/mL",
+                "width": "half"
+              },
+              {
+                "default": "",
+                "id": "electrolytes__magneisum-mg__4_5",
+                "label": "Magneisum (Mg+)",
+                "type": "number",
+                "unit": "",
+                "width": "half"
+              }
+            ]
+          },
+          {
+            "name": "Dengue profile",
+            "subLabels": [
+              {
+                "default": [],
+                "id": "dengue-profile__dengue-ns1-antigen__5_0",
+                "label": "DENGUE NS1 ANTIGEN",
+                "options": [
+                  "negative",
+                  "positive"
+                ],
+                "type": "multiselect",
+                "width": "half"
+              },
+              {
+                "default": [],
+                "id": "dengue-profile__dengue-igg__5_1",
+                "label": "DENGUE IgG",
+                "options": [
+                  "negative",
+                  "positive"
+                ],
+                "type": "multiselect",
+                "width": "half"
+              },
+              {
+                "default": [],
+                "id": "dengue-profile__dengue-igm__5_2",
+                "label": "DENGUE IgM",
+                "options": [
+                  "negative",
+                  "positive"
+                ],
+                "type": "multiselect",
+                "width": "half"
+              }
+            ]
+          }
+        ],
+        "popupWidth": "wide",
+        "title": "Lab investigations"
+      },
+      "/medicala": {
+        "category": "other",
+        "icon": "📋",
+        "layout": "columns-2",
+        "mainLabels": [
+          {
+            "name": "medical advise",
+            "subLabels": [
+              {
+                "default": "no other complaints gc fair  vitals stable  no comorbidities",
+                "id": "medical-advise__medical-advise__0_0",
+                "label": "medical advise",
+                "options": [
+                  "no other complaints gc fair  vitals stable  no comorbidities",
+                  "all danger signs explained reassurance done followup sos adequate hydration if symptom persist/worsen review sos",
+                  "review with reports  review sos"
+                ],
+                "type": "select",
+                "width": "half"
+              }
+            ]
+          }
+        ],
+        "popupWidth": "normal",
+        "title": "medical advise"
+      },
+      "/mes": {
+        "category": "other",
+        "icon": "📋",
+        "layout": "single",
+        "mainLabels": [
+          {
+            "name": "medical advise 1",
+            "subLabels": [
+              {
+                "default": [],
+                "id": "medical-advise-1__hydration__0_0",
+                "label": "hydration",
+                "options": [
+                  "Maintain adequate hydration  Avoid oily and spicy foods  Consume light, easily digestible meals",
+                  "F/U after one month",
+                  "maintain hydration\navoid spicy foods"
+                ],
+                "type": "advice",
+                "width": "half"
+              }
+            ]
+          }
+        ],
+        "popupWidth": "normal",
+        "title": "medical advise"
+      }
+    },
+    "vinaviTheme": "default"
+  }
+}

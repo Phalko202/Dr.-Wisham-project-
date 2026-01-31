@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "Vinavi Universal Helper",
+  "version": "1.0.0",
+  "description": "Combined Vinavi Quick Text + HMH Lab Integration in one extension",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://auth.aasandha.mv/*",
+    "https://vinavi.aasandha.mv/*",
+    "https://*.aasandha.mv/*"
+  ],
+  "icons": {
+    "16": "lab/icons/icon16.png",
+    "32": "lab/icons/icon32.png",
+    "48": "lab/icons/icon48.png",
+    "128": "lab/icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Vinavi Universal Helper",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "lab/icons/icon16.png",
+      "32": "lab/icons/icon32.png",
+      "48": "lab/icons/icon48.png",
+      "128": "lab/icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://vinavi.aasandha.mv/*", "https://auth.aasandha.mv/*", "https://*.aasandha.mv/*"],
+      "js": ["quicktext/content.js"],
+      "css": ["quicktext/styles.css"],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": ["https://vinavi.aasandha.mv/*"],
+      "js": ["lab/scripts/fullscreen-catalog.js", "lab/content.js"],
+      "css": ["lab/content.css"],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

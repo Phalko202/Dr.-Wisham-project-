@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinavi Quick Text - Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --primary-light: #38bdf8;
+      --accent: #06b6d4;
+      --purple: #a855f7;
+      --purple-light: #c084fc;
+      --green: #22c55e;
+      --green-light: #4ade80;
+      
+      /* Light theme for content area */
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --bg-input-light: #ffffff;
+      --border-light: #e2e8f0;
+      --text-dark: #1e293b;
+      --text-gray: #64748b;
+      
+      /* Dark theme for sidebar */
+      --sidebar-bg: #1e293b;
+      --sidebar-bg-dark: #0f172a;
+      --sidebar-border: #334155;
+      --sidebar-text: #e2e8f0;
+      --sidebar-text-muted: #94a3b8;
+      --sidebar-text-dim: #64748b;
+      
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-light);
+      min-height: 100vh;
+      color: var(--text-dark);
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 260px;
+      height: 100vh;
+      background: linear-gradient(180deg, var(--sidebar-bg) 0%, var(--sidebar-bg-dark) 100%);
+      border-right: 1px solid var(--sidebar-border);
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
+      padding: 0 24px;
+      margin-bottom: 32px;
+    }
+
+    .logo-icon { font-size: 36px; display: block; margin-bottom: 8px; }
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo-subtitle { font-size: 12px; color: #94a3b8; }
+
+    .nav-section { padding: 0 12px; margin-bottom: 24px; }
+    .nav-section-title {
+      font-size: 11px; font-weight: 700; color: var(--sidebar-text-dim);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 0 12px; margin-bottom: 8px;
+    }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 12px; padding: 12px;
+      border-radius: 10px; cursor: pointer; transition: all 0.2s ease;
+      color: var(--sidebar-text-muted); text-decoration: none; border: none;
+      background: none; width: 100%; font-size: 14px; font-family: inherit;
+      text-align: left;
+    }
+    .nav-item:hover { background: rgba(14, 165, 233, 0.15); color: var(--sidebar-text); }
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+      color: var(--primary-light);
+    }
+    .nav-item-icon { font-size: 20px; }
+    .nav-item-text { font-weight: 500; }
+
+    .sidebar-footer { margin-top: auto; padding: 24px; border-top: 1px solid var(--sidebar-border); }
+    .version { font-size: 12px; color: var(--sidebar-text-dim); }
+
+    .main { margin-left: 260px; padding: 32px; min-height: 100vh; background: var(--bg-light); }
+    .page-header { margin-bottom: 32px; }
+    .page-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+    .page-subtitle { font-size: 14px; color: var(--text-gray); }
+
+    .card {
+      background: var(--bg-white); border-radius: 16px;
+      border: 1px solid var(--border-light); padding: 24px; margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+    }
+    .card-title { font-size: 18px; font-weight: 600; color: var(--text-dark); }
+
+    .templates-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+    }
+
+    .template-card {
+      background: var(--bg-white);
+      border: 2px solid var(--border-light);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .template-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2);
+    }
+    .template-card.expanded {
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.25);
+    }
+    .template-card.custom {
+      border-color: var(--success);
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+    }
+    .template-card.custom:hover {
+      border-color: var(--success);
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.2);
+    }
+    .template-card-header {
+      padding: 20px; cursor: pointer; display: flex; align-items: flex-start; gap: 16px;
+      transition: background 0.2s;
+    }
+    .template-card-header:hover { background: rgba(14, 165, 233, 0.05); }
+    .template-icon { font-size: 32px; flex-shrink: 0; }
+    .template-info { flex: 1; }
+    .template-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .template-shortcut { 
+      font-size: 13px; color: var(--primary); font-family: 'Consolas', monospace; 
+      margin-bottom: 8px; background: rgba(14, 165, 233, 0.1); 
+      padding: 4px 10px; border-radius: 6px; display: inline-block;
+    }
+    .template-fields { font-size: 12px; color: var(--text-dim); }
+    .template-expand {
+      color: var(--primary); font-size: 12px; flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .template-details {
+      padding: 0 20px 20px 20px; border-top: 1px solid var(--border);
+      animation: slideDown 0.2s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .template-details .field-group-header {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 20px;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .template-details .field-group-header:first-child {
+      margin-top: 0;
+    }
+    .template-details .field-item {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.04) 0%, rgba(6, 182, 212, 0.04) 100%);
+      border: 2px solid rgba(14, 165, 233, 0.15);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+      transition: all 0.2s;
+    }
+    .template-details .field-item:hover {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+      border-color: rgba(14, 165, 233, 0.3);
+      transform: translateX(4px);
+    }
+    .template-details .field-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .template-details .field-type {
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 0;
+      box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+    }
+    .template-details .field-options {
+      font-size: 13px;
+      color: var(--text-dark);
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 10px;
+      border: 2px solid var(--border-light);
+      font-weight: 500;
+    }
+    .template-details .field-options::before {
+      content: '📋 ';
+      margin-right: 6px;
+    }
+    .template-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
+    }
+    .template-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 2px dashed var(--border-light);
+    }
+    .template-action-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      justify-content: center;
+    }
+    .template-action-btn.edit {
+      background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(100, 116, 139, 0.3);
+    }
+    .template-action-btn.edit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
+    }
+    .template-action-btn.delete {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+    }
+    .template-action-btn.delete:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn {
+      padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600;
+      cursor: pointer; border: none; transition: all 0.2s ease;
+      display: inline-flex; align-items: center; gap: 8px; font-family: inherit;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white; box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5); }
+    .btn-secondary { background: var(--border); color: var(--text); }
+    .btn-secondary:hover { background: #475569; }
+    .btn-success { background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%); color: white; }
+
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease;
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border);
+      width: 90%; max-width: 600px; max-height: 85vh; overflow: hidden;
+      transform: scale(0.9) translateY(20px); transition: all 0.3s ease;
+    }
+    .modal-overlay.active .modal { transform: scale(1) translateY(0); }
+    .modal-header {
+      padding: 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white;
+    }
+    .modal-title { font-size: 20px; font-weight: 700; }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.2);
+      border: none; color: white; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.3); }
+    .modal-body { padding: 24px; max-height: 50vh; overflow-y: auto; }
+    .modal-footer {
+      padding: 20px 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: flex-end; gap: 12px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-gray); margin-bottom: 8px; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-input-light);
+      border: 2px solid var(--border-light);
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .form-input:hover, .form-select:hover, .form-textarea:hover {
+      border-color: #cbd5e1;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+      background: white;
+    }
+    .form-input::placeholder { color: var(--text-gray); }
+    .form-hint { font-size: 12px; color: var(--text-gray); margin-top: 6px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-actions {
+      display: flex; gap: 12px; justify-content: flex-end; margin-top: 32px;
+      padding-top: 24px; border-top: 1px solid var(--border-light);
+    }
+
+    /* Main Label Sections - Clear bordered groups */
+    .mainlabel-section {
+      background: var(--bg-white);
+      border: 3px solid var(--primary);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px rgba(14, 165, 233, 0.15);
+    }
+    .mainlabel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 3px solid var(--border-light);
+    }
+    .mainlabel-title-input {
+      flex: 1;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+      border: 2px solid var(--primary);
+      border-radius: 10px;
+      color: var(--text-dark);
+    }
+    .mainlabel-remove {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #fee2e2;
+      border: 2px solid var(--danger);
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mainlabel-remove:hover {
+      background: var(--danger);
+      color: white;
+    }
+    
+    /* Sub Label Fields - Clear individual boxes */
+    .sublabel-field {
+      background: var(--bg-light);
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+    .sublabel-field:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+    }
+    .sublabel-field-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px dashed var(--border-light);
+    }
+    .sublabel-field-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .sublabel-field-remove {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #fee2e2;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .sublabel-field-remove:hover {
+      background: var(--danger);
+      color: white;
+    }
+    
+    /* Visual type indicator */
+    .field-type-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .field-type-badge.type-number {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    .field-type-badge.type-text {
+      background: #fce7f3;
+      color: #9f1239;
+    }
+    .field-type-badge.type-select {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .field-type-badge.type-multiselect {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    
+    /* Add sublabel button within main label */
+    .add-sublabel-btn {
+      width: 100%;
+      padding: 12px;
+      border: 2px dashed var(--primary);
+      border-radius: 10px;
+      background: rgba(14, 165, 233, 0.05);
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      margin-top: 12px;
+    }
+    .add-sublabel-btn:hover {
+      background: rgba(14, 165, 233, 0.1);
+      border-color: var(--primary-dark);
+    }
+    .field-item-title { font-size: 14px; font-weight: 600; color: var(--primary); }
+    .field-remove {
+      width: 28px; height: 28px; border-radius: 6px; background: #fee2e2;
+      border: none; color: var(--danger); cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .field-remove:hover { background: #fecaca; }
+
+    .add-field-btn {
+      width: 100%; padding: 14px; border: 2px dashed var(--border-light); border-radius: 10px;
+      background: var(--bg-white); color: var(--text-gray); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; display: flex; align-items: center;
+      justify-content: center; gap: 8px; font-family: inherit; margin-top: 12px;
+    }
+    .add-field-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(14, 165, 233, 0.05); }
+
+    .options-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; margin-bottom: 8px; }
+    .option-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+      border: 2px solid var(--primary);
+      transition: all 0.2s;
+    }
+    .option-tag:hover {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+    }
+    .option-remove {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .option-remove:hover {
+      background: var(--danger);
+      color: white;
+    }
+    .add-option-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .add-option-row input {
+      flex: 1;
+      border: 2px solid var(--border-light) !important;
+    }
+    .add-option-row input:focus {
+      border-color: var(--primary) !important;
+    }
+    
+    /* Medication indicator */
+    .medication-indicator {
+      margin-bottom: 16px;
+    }
+    .medication-indicator > div {
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-radius: 10px;
+      border: 2px solid #1976d2;
+      color: #1565c0;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+    }
+    .medication-indicator span:first-child {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+    .medication-indicator strong {
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .add-option-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+    }
+    .add-option-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+    }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card {
+      border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    }
+    .stat-card:nth-child(1) {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+    }
+    .stat-card:nth-child(1) .stat-value {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-card:nth-child(2) {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+    }
+    .stat-card:nth-child(2) .stat-value {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-card:nth-child(3) {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(74, 222, 128, 0.1) 100%);
+    }
+    .stat-card:nth-child(3) .stat-value {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-value {
+      font-size: 32px; font-weight: 700;
+    }
+    .stat-label { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--text-dim); }
+    .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state-text { font-size: 16px; margin-bottom: 24px; }
+
+    .tabs { display: flex; gap: 4px; background: var(--bg-input); padding: 4px; border-radius: 12px; margin-bottom: 24px; }
+    .tab {
+      flex: 1; padding: 12px 16px; border: none; background: transparent;
+      color: var(--text-dim); font-size: 14px; font-weight: 500; cursor: pointer;
+      border-radius: 8px; transition: all 0.2s; font-family: inherit;
+    }
+    .tab.active { background: var(--border); color: var(--text); }
+    .tab:hover:not(.active) { color: var(--text-muted); }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; background: var(--success);
+      color: white; padding: 16px 24px; border-radius: 12px; font-weight: 500;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); transform: translateY(100px);
+      opacity: 0; transition: all 0.3s ease; z-index: 2000;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { background: var(--danger); }
+
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    .how-to-use { background: var(--bg-input); border-radius: 12px; padding: 20px; line-height: 1.8; }
+    .how-to-use code { background: var(--border); padding: 2px 8px; border-radius: 4px; color: var(--primary); }
+    .how-to-use ol { margin-left: 20px; margin-top: 8px; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-card); }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">⚡</span>
+      <div class="logo-text">Vinavi Quick Text</div>
+      <div class="logo-subtitle">Medical Documentation</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Menu</div>
+      <button class="nav-item active" data-page="dashboard">
+        <span class="nav-item-icon">📊</span>
+        <span class="nav-item-text">Dashboard</span>
+      </button>
+      <button class="nav-item" data-page="templates">
+        <span class="nav-item-icon">📝</span>
+        <span class="nav-item-text">All Templates</span>
+      </button>
+      <button class="nav-item" data-page="custom">
+        <span class="nav-item-icon">✨</span>
+        <span class="nav-item-text">Custom Templates</span>
+      </button>
+      <button class="nav-item" data-page="create">
+        <span class="nav-item-icon">➕</span>
+        <span class="nav-item-text">Create Template</span>
+      </button>
+    </div>
+    <div class="sidebar-footer">
+      <div class="version">Version 1.0.0</div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="page-section active" id="page-dashboard">
+      <div class="page-header">
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Overview of your medical text shortcuts</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">Total Templates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-builtin">0</div>
+          <div class="stat-label">Built-in Templates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-custom">0</div>
+          <div class="stat-label">Custom Templates</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">💡 How to Use</h2>
+        </div>
+        <div class="how-to-use">
+          <ol>
+            <li>Go to your <strong>Vinavi portal</strong> or any webpage</li>
+            <li>Click in any text field (like the Complaints box)</li>
+            <li>Type a shortcut like <code>/oeknee</code> or <code>/vitals</code></li>
+            <li>A popup menu will appear - select your template</li>
+            <li>Fill in the options and click <strong>Insert</strong></li>
+          </ol>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Available Templates</h2>
+          <button class="btn btn-primary" id="dashboard-create-btn"><span>➕</span> Create New</button>
+        </div>
+        <div class="templates-grid" id="recent-templates"></div>
+      </div>
+    </section>
+
+    <section class="page-section" id="page-templates">
+      <div class="page-header">
+        <h1 class="page-title">All Templates</h1>
+        <p class="page-subtitle">View and manage all your text expansion templates</p>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-filter="all">All</button>
+        <button class="tab" data-filter="builtin">Built-in</button>
+        <button class="tab" data-filter="custom">Custom</button>
+      </div>
+      <div class="templates-grid" id="all-templates"></div>
+    </section>
+
+    <section class="page-section" id="page-custom">
+      <div class="page-header">
+        <h1 class="page-title">Custom Templates</h1>
+        <p class="page-subtitle">Create and manage your own shortcuts</p>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Your Custom Templates</h2>
+          <button class="btn btn-primary" id="custom-create-btn"><span>➕</span> Create New Template</button>
+        </div>
+        <div class="templates-grid" id="custom-templates"></div>
+        <div class="empty-state" id="empty-custom" style="display: none;">
+          <div class="empty-state-icon">✨</div>
+          <div class="empty-state-text">You haven't created any custom templates yet</div>
+          <button class="btn btn-primary" id="empty-create-btn">Create Your First Template</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREATE TEMPLATE PAGE -->
+    <section class="page-section" id="page-create">
+      <div class="page-header">
+        <h1 class="page-title" id="create-page-title">Create New Template</h1>
+        <p class="page-subtitle">Design your custom medical text expansion shortcut</p>
+      </div>
+      
+      <div class="card">
+        <form id="template-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Shortcut Command *</label>
+              <input type="text" class="form-input" id="template-shortcut" placeholder="/enterlabs" required>
+              <div class="form-hint">Start with / followed by a word (e.g., /enterlabs, /degue)</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Template Name *</label>
+              <input type="text" class="form-input" id="template-name" placeholder="Lab Investigations" required>
+              <div class="form-hint">Descriptive name for your template</div>
+            </div>
+          </div>
+          
+          <!-- Display Layout Option -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">📐 Display Layout</label>
+              <select class="form-select" id="template-layout">
+                <option value="single" selected>Single Column (Default)</option>
+                <option value="columns-2">2 Columns Side-by-Side</option>
+                <option value="columns-3">3 Columns Side-by-Side</option>
+              </select>
+              <div class="form-hint">Choose how main labels appear in the popup</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">🖥️ Popup Width</label>
+              <select class="form-select" id="template-width">
+                <option value="normal" selected>Normal (700px)</option>
+                <option value="wide">Wide (900px)</option>
+                <option value="extra-wide">Extra Wide (1100px)</option>
+              </select>
+              <div class="form-hint">Wider popup for column layouts</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Main Labels & Sub Labels</label>
+            <div class="form-hint">Create main sections (e.g., Hemogram) and add sub-labels (e.g., RBC, HB) under each</div>
+            <div id="mainlabels-container" style="margin-top: 20px;"></div>
+            <button type="button" class="add-field-btn" id="add-mainlabel-btn"><span>➕</span> Add Main Label Section</button>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-create-btn">Cancel</button>
+            <button type="button" class="btn btn-success" id="save-template-btn">💾 Save Template</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>

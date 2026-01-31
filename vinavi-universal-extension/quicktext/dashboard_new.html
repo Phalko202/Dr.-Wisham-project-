@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinavi Quick Text - Templates</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      
+      --bg-dark: #0f172a;
+      --bg-darker: #020617;
+      --sidebar-bg: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+    
+    /* Layout */
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+    
+    .logo-icon {
+      font-size: 32px;
+    }
+    
+    .logo-text h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 2px;
+    }
+    
+    .logo-text p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .nav {
+      flex: 1;
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      margin-bottom: 6px;
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    
+    .nav-item.active {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+    
+    .nav-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+    }
+    
+    .version {
+      padding: 16px;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Main Content */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px 40px;
+    }
+    
+    .page {
+      display: none;
+    }
+    
+    .page.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .page-header {
+      margin-bottom: 32px;
+    }
+    
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    
+    .page-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
+    }
+    
+    .btn-primary:hover {
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+      transform: translateY(-1px);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--text-dark);
+      border: 2px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .search-box {
+      flex: 1;
+      max-width: 400px;
+      position: relative;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 10px 40px 10px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    
+    /* Template Grid */
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    
+    .template-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .template-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    
+    .template-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .template-icon {
+      font-size: 32px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border-radius: 10px;
+    }
+    
+    .template-info {
+      flex: 1;
+    }
+    
+    .template-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    
+    .template-shortcut {
+      font-size: 13px;
+      color: var(--primary);
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+    }
+    
+    .template-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    
+    .template-category {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .template-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .template-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: white;
+      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .template-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .template-btn.delete:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    
+    /* Form */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+    
+    .form-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    
+    /* Field Section */
+    .field-section {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .field-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .field-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    
+    .btn-remove {
+      padding: 6px 12px;
+      background: transparent;
+      color: var(--danger);
+      border: 2px solid var(--danger);
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-remove:hover {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .btn-add {
+      width: 100%;
+      padding: 14px;
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-add:hover {
+      border-color: var(--primary);
+      background: rgba(14, 165, 233, 0.05);
+    }
+
+    /* Theme Variables */
+    body.theme-dark {
+      --bg-light: #0d1117;
+      --bg-white: #161b22;
+      --bg-darker: #010409;
+      --text-dark: #e6edf3;
+      --text-muted: #8b949e;
+      --border: #30363d;
+      --primary: #58a6ff;
+      --accent: #3fb950;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.6);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.7);
+      --sidebar-bg: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+    }
+    
+    body.theme-dark .main { background: var(--bg-light); }
+    body.theme-dark .form-input,
+    body.theme-dark .form-select,
+    body.theme-dark select,
+    body.theme-dark input,
+    body.theme-dark .search-box input {
+      background: #21262d !important;
+      border-color: #30363d !important;
+      color: #e6edf3 !important;
+    }
+    body.theme-dark .template-card,
+    body.theme-dark .mainlabel-section,
+    body.theme-dark .sublabel-field,
+    body.theme-dark .settings-section {
+      background: #161b22 !important;
+      border-color: #30363d !important;
+    }
+    body.theme-dark .mainlabel-header {
+      background: linear-gradient(135deg, #21262d 0%, #161b22 100%) !important;
+    }
+    body.theme-dark .options-container {
+      background: #21262d !important;
+      border-color: #30363d !important;
+    }
+    body.theme-dark .form-hint { color: #8b949e; }
+    body.theme-dark .sidebar { background: var(--sidebar-bg); }
+    
+    body.theme-ocean {
+      --primary: #0891b2;
+      --primary-dark: #0e7490;
+      --accent: #06b6d4;
+      --bg-light: #ecfeff;
+    }
+    
+    body.theme-purple {
+      --primary: #7c3aed;
+      --primary-dark: #6d28d9;
+      --accent: #8b5cf6;
+      --bg-light: #f5f3ff;
+    }
+    
+    body.theme-green {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --accent: #10b981;
+      --bg-light: #ecfdf5;
+    }
+    
+    /* Realism Theme - Soft gradients with depth */
+    body.theme-realism {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #ec4899;
+      --bg-light: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      --bg-white: #ffffff;
+      --border: #d1d5db;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.16);
+    }
+    body.theme-realism .main { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); }
+    body.theme-realism .template-card,
+    body.theme-realism .mainlabel-section,
+    body.theme-realism .settings-section {
+      background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%) !important;
+      border: 1px solid rgba(0,0,0,0.08) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+    body.theme-realism .btn-primary {
+      background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+    body.theme-realism .sidebar {
+      background: linear-gradient(180deg, #312e81 0%, #1e1b4b 100%);
+    }
+    
+    /* Windows Classic Theme - Retro Windows 95/XP look */
+    body.theme-win-classic {
+      --primary: #000080;
+      --primary-dark: #000066;
+      --accent: #008080;
+      --bg-light: #c0c0c0;
+      --bg-white: #ffffff;
+      --text-dark: #000000;
+      --text-muted: #4a4a4a;
+      --border: #808080;
+    }
+    body.theme-win-classic .main { background: #c0c0c0; }
+    body.theme-win-classic .template-card,
+    body.theme-win-classic .mainlabel-section,
+    body.theme-win-classic .sublabel-field,
+    body.theme-win-classic .settings-section {
+      background: #ece9d8 !important;
+      border: 2px outset #ffffff !important;
+      border-radius: 0 !important;
+      box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #ffffff !important;
+    }
+    body.theme-win-classic .form-input,
+    body.theme-win-classic .form-select,
+    body.theme-win-classic input,
+    body.theme-win-classic select {
+      border: 2px inset #808080 !important;
+      border-radius: 0 !important;
+      background: #ffffff !important;
+    }
+    body.theme-win-classic .btn {
+      border: 2px outset #ffffff !important;
+      border-radius: 0 !important;
+      background: #c0c0c0 !important;
+      box-shadow: none !important;
+    }
+    body.theme-win-classic .btn-primary {
+      background: #000080 !important;
+      color: white !important;
+    }
+    body.theme-win-classic .sidebar {
+      background: linear-gradient(180deg, #245edc 0%, #3a6ea5 100%);
+    }
+    body.theme-win-classic .nav-item.active {
+      background: #316ac5 !important;
+      border-radius: 0 !important;
+    }
+    
+    /* Windows Modern Theme - Windows 11 Fluent Design */
+    body.theme-win-modern {
+      --primary: #0078d4;
+      --primary-dark: #106ebe;
+      --accent: #60cdff;
+      --bg-light: #f3f3f3;
+      --bg-white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --border: #e5e5e5;
+    }
+    body.theme-win-modern .main { background: #f3f3f3; }
+    body.theme-win-modern .template-card,
+    body.theme-win-modern .mainlabel-section,
+    body.theme-win-modern .sublabel-field,
+    body.theme-win-modern .settings-section {
+      background: rgba(255, 255, 255, 0.7) !important;
+      backdrop-filter: blur(20px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.5) !important;
+      border-radius: 8px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    }
+    body.theme-win-modern .form-input,
+    body.theme-win-modern .form-select,
+    body.theme-win-modern input,
+    body.theme-win-modern select {
+      background: rgba(255, 255, 255, 0.5) !important;
+      border: 1px solid #d1d1d1 !important;
+      border-radius: 4px !important;
+    }
+    body.theme-win-modern .form-input:focus,
+    body.theme-win-modern input:focus {
+      border-bottom: 2px solid #0078d4 !important;
+    }
+    body.theme-win-modern .btn-primary {
+      background: #0078d4 !important;
+      border-radius: 4px !important;
+    }
+    body.theme-win-modern .sidebar {
+      background: rgba(32, 32, 32, 0.95);
+      backdrop-filter: blur(20px);
+    }
+
+    /* Modern Section Builder */
+    .mainlabel-section {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    
+    .mainlabel-section:hover {
+      box-shadow: var(--shadow-md);
+    }
+    
+    .mainlabel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .mainlabel-title-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      background: white;
+      transition: all 0.2s ease;
+    }
+    
+    .mainlabel-title-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+    
+    .mainlabel-title-input::placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    
+    .mainlabel-remove {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #fee2e2;
+      color: var(--danger);
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .mainlabel-remove:hover {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .mainlabel-sublabels {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    @media (max-width: 900px) {
+      .mainlabel-sublabels {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .add-sublabel-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: calc(100% - 40px);
+      margin: 0 20px 20px;
+      padding: 14px;
+      border: 2px dashed var(--primary);
+      border-radius: 10px;
+      background: rgba(14, 165, 233, 0.05);
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .add-sublabel-btn:hover {
+      background: rgba(14, 165, 233, 0.1);
+      border-style: solid;
+    }
+    
+    /* Sub Label Field Card - Compact */
+    .sublabel-field {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      transition: all 0.2s ease;
+      height: fit-content;
+    }
+    
+    .sublabel-field:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+    }
+    
+    .sublabel-field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .sublabel-field-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    
+    .sublabel-field-remove {
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    
+    .sublabel-field-remove:hover {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    
+    .form-select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    /* Options Tags - Compact */
+    .options-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+      min-height: 28px;
+      padding: 6px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    
+    .option-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 500;
+      animation: tagPop 0.2s ease;
+    }
+    
+    @keyframes tagPop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .option-remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border: none;
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 50%;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .option-remove:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    
+    .add-option-row {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .option-input {
+      flex: 1;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    
+    .option-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    /* Medication Indicator - Compact */
+    .medication-indicator {
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+      border: 1px solid #60a5fa;
+      border-radius: 8px;
+      color: #1d4ed8;
+      font-size: 12px;
+    }
+    
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text-dark);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 10000;
+    }
+    
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .toast.error {
+      background: var(--danger);
+    }
+    
+    .toast.success {
+      background: var(--success);
+    }
+    
+    /* Settings */
+    .settings-section {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .settings-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .settings-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    
+    /* Theme Buttons */
+    .theme-options {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .theme-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg-light);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+    
+    .theme-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .theme-btn.active {
+      border-color: var(--primary);
+      background: rgba(14, 165, 233, 0.1);
+    }
+    
+    .theme-preview {
+      width: 48px;
+      height: 32px;
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    .danger-zone {
+      border-color: var(--danger);
+    }
+    
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+      border: none;
+    }
+    
+    .btn-danger:hover {
+      background: #dc2626;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+    
+    .empty-state-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      cursor: pointer;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">
+          <h1>Vinavi Quick Text</h1>
+          <p>Medical Templates</p>
+        </div>
+      </div>
+      
+      <nav class="nav">
+        <div class="nav-item active" data-page="templates">
+          <span class="nav-icon">📋</span>
+          <span>All Templates</span>
+        </div>
+        <div class="nav-item" data-page="create">
+          <span class="nav-icon">➕</span>
+          <span>Create Template</span>
+        </div>
+        <div class="nav-item" data-page="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </div>
+      </nav>
+      
+      <div class="version">Version 2.0.0</div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main">
+      <!-- Templates Page -->
+      <div class="page active" id="page-templates">
+        <div class="page-header">
+          <h1 class="page-title">Templates</h1>
+          <p class="page-subtitle">Create and manage your medical text expansion shortcuts</p>
+        </div>
+        
+        <div class="toolbar">
+          <button class="btn btn-primary" id="btn-new-template">
+            <span>➕</span> Create New Template
+          </button>
+          <div class="search-box">
+            <input type="text" id="search-templates" placeholder="Search templates...">
+            <span class="search-icon">🔍</span>
+          </div>
+          <select id="filter-category">
+            <option value="all">All Categories</option>
+            <option value="examination">Examination</option>
+            <option value="vitals">Vitals</option>
+            <option value="labs">Labs</option>
+            <option value="prescription">Prescription</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="template-grid" id="templates-container"></div>
+        
+        <div class="empty-state" id="empty-state" style="display: none;">
+          <div class="empty-state-icon">📝</div>
+          <div class="empty-state-text">No templates yet</div>
+          <button class="btn btn-primary" onclick="document.querySelector('[data-page=create]').click()">
+            <span>➕</span> Create Your First Template
+          </button>
+        </div>
+      </div>
+      
+      <!-- Create/Edit Page -->
+      <div class="page" id="page-create">
+        <div class="page-header">
+          <h1 class="page-title" id="create-page-title">Create New Template</h1>
+          <p class="page-subtitle">Design your custom text expansion shortcut</p>
+        </div>
+        
+        <div style="max-width: 900px;">
+          <!-- Compact Header Grid -->
+          <div class="template-header-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; padding: 20px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">⌨️ Shortcut</label>
+              <input type="text" class="form-input" id="template-shortcut" placeholder="enterlabs" style="padding: 10px 12px; font-size: 14px;">
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">📝 Template Name</label>
+              <input type="text" class="form-input" id="template-name" placeholder="Lab Investigations" style="padding: 10px 12px; font-size: 14px;">
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">📁 Category</label>
+              <select class="form-input" id="template-category" style="padding: 10px 12px; font-size: 14px;">
+                <option value="examination">Examination</option>
+                <option value="vitals">Vitals</option>
+                <option value="labs">Labs</option>
+                <option value="prescription">Prescription</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">📊 Layout</label>
+              <select class="form-input" id="template-layout" style="padding: 10px 12px; font-size: 14px;">
+                <option value="single">Single Column</option>
+                <option value="columns-2">2 Columns</option>
+                <option value="columns-3">3 Columns</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">↔️ Popup Width</label>
+              <select class="form-input" id="template-width" style="padding: 10px 12px; font-size: 14px;">
+                <option value="normal">Normal</option>
+                <option value="wide">Wide</option>
+                <option value="extra-wide">Extra Wide</option>
+              </select>
+            </div>
+            
+            <div style="display: flex; align-items: flex-end;">
+              <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">💡 Type <strong>/shortcut</strong> in Vinavi to trigger your template</p>
+            </div>
+          </div>
+          
+          <div id="mainlabels-container"></div>
+          
+          <button class="btn-add" id="add-mainlabel-btn">➕ Add Section</button>
+          
+          <div style="margin-top: 32px; display: flex; gap: 12px;">
+            <button class="btn btn-primary" id="save-template-btn">💾 Save Template</button>
+            <button class="btn btn-secondary" id="cancel-create-btn">✖️ Cancel</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Settings Page -->
+      <div class="page" id="page-settings">
+        <div class="page-header">
+          <h1 class="page-title">Settings</h1>
+          <p class="page-subtitle">Manage your extension settings and data</p>
+        </div>
+        
+        <div style="max-width: 700px;">
+          <div class="settings-section">
+            <div class="settings-title">🎨 Color Theme</div>
+            <div class="settings-desc">Choose your preferred color scheme - also changes popup appearance in Vinavi</div>
+            <div class="theme-options" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+              <button class="theme-btn active" data-theme="default" title="Classic Default">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);"></span>
+                <span>Classic</span>
+              </button>
+              <button class="theme-btn" data-theme="dark" title="Dark Mode">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #0d1117, #161b22);"></span>
+                <span>Dark</span>
+              </button>
+              <button class="theme-btn" data-theme="realism" title="Realism - Soft gradients">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #6366f1, #ec4899);"></span>
+                <span>Realism</span>
+              </button>
+              <button class="theme-btn" data-theme="win-classic" title="Windows Classic 95/XP">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #245edc, #c0c0c0);"></span>
+                <span>Win Classic</span>
+              </button>
+              <button class="theme-btn" data-theme="win-modern" title="Windows 11 Modern">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #0078d4, #60cdff);"></span>
+                <span>Win 11</span>
+              </button>
+              <button class="theme-btn" data-theme="ocean" title="Ocean">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #0891b2, #06b6d4);"></span>
+                <span>Ocean</span>
+              </button>
+              <button class="theme-btn" data-theme="purple" title="Purple">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #7c3aed, #8b5cf6);"></span>
+                <span>Purple</span>
+              </button>
+              <button class="theme-btn" data-theme="green" title="Green">
+                <span class="theme-preview" style="background: linear-gradient(135deg, #059669, #10b981);"></span>
+                <span>Green</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <div class="settings-title">📊 Storage Info</div>
+            <div class="settings-desc">View your current template storage usage</div>
+            <div id="storage-info" style="font-size: 14px; color: var(--text-muted);"></div>
+          </div>
+          
+          <div class="settings-section danger-zone">
+            <div class="settings-title">⚠️ Danger Zone</div>
+            <div class="settings-desc">These actions cannot be undone</div>
+            <button class="btn btn-danger" id="clear-all-btn">🗑️ Delete All Templates</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="toast" id="toast"></div>
+  
+  <script src="dashboard.js"></script>
+</body>
+</html>

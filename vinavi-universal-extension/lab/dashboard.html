@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMH Vinavi Lab Integration</title>
+  <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+  <!-- Navigation Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563eb"/>
+              <stop offset="50%" stop-color="#3b82f6"/>
+              <stop offset="100%" stop-color="#10b981"/>
+            </linearGradient>
+            <linearGradient id="glowGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563eb" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.3"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="12" fill="url(#logoGradient)"/>
+          <rect x="1" y="1" width="38" height="38" rx="11" fill="none" stroke="url(#glowGradient)" stroke-width="2"/>
+          
+          <!-- Medical cross with gradient -->
+          <g transform="translate(12, 10)">
+            <rect x="6" y="0" width="4" height="20" rx="2" fill="white" opacity="0.95"/>
+            <rect x="0" y="6" width="16" height="4" rx="2" fill="white" opacity="0.95"/>
+            
+            <!-- DNA helix elements -->
+            <circle cx="3" cy="4" r="1.5" fill="#e0f2fe"/>
+            <circle cx="13" cy="4" r="1.5" fill="#e0f2fe"/>
+            <circle cx="13" cy="10" r="1.5" fill="#d1fae5"/>
+            <circle cx="3" cy="16" r="1.5" fill="#d1fae5"/>
+            <circle cx="3" cy="10" r="1.5" fill="#bfdbfe"/>
+            <circle cx="13" cy="16" r="1.5" fill="#a7f3d0"/>
+          </g>
+        </svg>
+        <div class="logo-text-container">
+          <span class="logo-text-main">HMH Vinavi</span>
+          <span class="logo-text-sub">Lab Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="#search" class="nav-item active" data-view="search">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 2a7 7 0 105.618 11.247l4.567 4.568 1.415-1.415-4.568-4.567A7 7 0 009 2zm0 2a5 5 0 110 10A5 5 0 019 4z"/>
+        </svg>
+        <span>Search Patient</span>
+      </a>
+      <a href="#packages" class="nav-item" data-view="packages">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M4 4h12v12H4V4zm2 2v8h8V6H6zm9 9h1v1h-1v-1z"/>
+        </svg>
+        <span>Lab Bundles (only)</span>
+      </a>
+      <a href="#catalog" class="nav-item" data-view="catalog">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 2a2 2 0 00-2 2v1H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H9zm0 2h2v3H9V4z"/>
+        </svg>
+        <span>Lab Catalog</span>
+      </a>
+      <a href="#failLog" class="nav-item" data-view="failLog">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 2a8 8 0 00-8 8h2a6 6 0 1112 0 6 6 0 01-12 0H2a8 8 0 1016 0 8 8 0 00-8-8zm1 4v5l3.5 2-1 1.5L9 12V6h2z"/>
+        </svg>
+        <span>Failed Tests</span>
+      </a>
+      <a href="#settings" class="nav-item" data-view="settings" style="display: none;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 2a1 1 0 011 1v1.08c.518.14 1.006.34 1.456.587l.765-.765a1 1 0 111.414 1.414l-.765.765c.248.45.447.938.587 1.456H16a1 1 0 110 2h-1.08a5.995 5.995 0 01-.587 1.456l.765.765a1 1 0 01-1.414 1.414l-.765-.765a5.995 5.995 0 01-1.456.587V16a1 1 0 11-2 0v-1.08a5.995 5.995 0 01-1.456-.587l-.765.765a1 1 0 01-1.414-1.414l.765-.765A5.995 5.995 0 015.08 11H4a1 1 0 110-2h1.08c.14-.518.34-1.006.587-1.456l-.765-.765a1 1 0 011.414-1.414l.765.765A5.995 5.995 0 018.92 5.08V4a1 1 0 011-1zm0 5a3 3 0 100 6 3 3 0 000-6z"/>
+        </svg>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info" id="userInfoCard" style="cursor: pointer;" title="Click to view full details">
+        <div class="user-avatar">DR</div>
+        <div class="user-details">
+          <div class="user-name" id="userName">Loading...</div>
+          <div class="user-specialty" id="userSpecialty">Loading...</div>
+          <div class="user-role" id="userRole">Doctor</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 id="pageTitle">Search Patient</h1>
+        <div class="header-actions">
+          <button id="pushClinicalSetBtn" class="btn-clinical-set-header" style="display: none;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M3 3h10v2H3V3zm0 4h10v2H3V7zm0 4h7v2H3v-2z" opacity="0.3"/>
+              <circle cx="13" cy="13" r="3" fill="currentColor"/>
+              <path d="M13 11.5v3M11.5 13h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Push Labs + Meds Bundle
+          </button>
+          <button id="renewRxHeaderBtn" class="btn-renew-rx-header" style="display: none;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 2a6 6 0 0 0-6 6h2a4 4 0 1 1 4 4v-2l-3 3 3 3v-2a6 6 0 0 0 0-12z"/>
+            </svg>
+            Renew Rx
+          </button>
+          <div class="sync-status" id="syncStatus">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <circle cx="8" cy="8" r="2" fill="#10b981"/>
+            </svg>
+            <span>Connected to Vinavi</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search View -->
+    <section id="searchView" class="view active">
+      <div class="search-container">
+        <div class="search-box-large">
+          <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="text" id="patientSearchInput" placeholder="Search by Patient ID, Name, NIC, or Phone Number..." autocomplete="off">
+          <button id="searchButton" class="btn-search">Search</button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="loading-container hidden">
+        <div class="spinner-large"></div>
+        <p>Searching patients...</p>
+      </div>
+
+      <!-- Results Grid -->
+      <div id="patientResultsGrid" class="results-grid hidden"></div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="empty-container">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="emptyLogoGradient" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563eb" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.2"/>
+            </linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="30" fill="url(#emptyLogoGradient)"/>
+          <circle cx="60" cy="60" r="50" stroke="#e5e7eb" stroke-width="2" fill="none"/>
+          
+          <!-- Medical cross -->
+          <g transform="translate(42, 36)">
+            <rect x="14" y="0" width="8" height="48" rx="4" fill="#93c5fd" opacity="0.5"/>
+            <rect x="0" y="14" width="36" height="8" rx="4" fill="#6ee7b7" opacity="0.5"/>
+          </g>
+          
+          <!-- Search icon overlay -->
+          <g transform="translate(70, 70)">
+            <circle cx="8" cy="8" r="7" stroke="#9ca3af" stroke-width="2" fill="none"/>
+            <path d="M13 13l6 6" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <h3>Search for a Patient</h3>
+        <p>Enter patient information to begin lab test ordering</p>
+      </div>
+    </section>
+
+    <!-- Patient Details View -->
+    <section id="patientView" class="view">
+      <button id="backToSearch" class="btn-back">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M12 4l-8 6 8 6V4z"/>
+        </svg>
+        Back to Search
+      </button>
+
+      <div class="patient-header-card">
+        <div class="patient-image-section">
+          <img id="patientImage" class="patient-photo" src="" alt="Patient" style="display:none;">
+          <div id="patientImagePlaceholder" class="patient-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="patient-info-grid">
+          <div class="info-item">
+            <label>Patient Name</label>
+            <span id="patientName">-</span>
+          </div>
+          <div class="info-item">
+            <label>Patient ID</label>
+            <span id="patientId">-</span>
+          </div>
+          <div class="info-item">
+            <label>Age / Gender</label>
+            <span id="patientAge">-</span>
+          </div>
+          <div class="info-item">
+            <label>Phone</label>
+            <span id="patientPhone">-</span>
+          </div>
+          <div class="info-item">
+            <label>National ID</label>
+            <span id="patientNic">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>Doctor Episodes</h2>
+        <span class="badge" id="episodeCount">0</span>
+      </div>
+
+      <!-- Episode Filters -->
+      <div id="resultsFilters" class="quick-filters" style="display: none;">
+        <button class="filter-chip active" data-filter="all">All Episodes</button>
+        <button class="filter-chip" data-filter="my">My Episodes</button>
+        <button class="filter-chip" data-filter="today">Today</button>
+        <button class="filter-chip" data-filter="week">This Week</button>
+        <button class="filter-chip" data-filter="month">This Month</button>
+        <button class="filter-chip" data-filter="custom">Custom Date</button>
+      </div>
+      <div id="customDateFilter" class="custom-date-filter" style="display: none;">
+        <input type="date" id="filterDateFrom" class="date-input">
+        <span style="margin: 0 8px; color: #6b7280;">to</span>
+        <input type="date" id="filterDateTo" class="date-input">
+        <button id="applyDateFilter" class="btn-apply-filter">Apply</button>
+      </div>
+
+      <div id="episodesGrid" class="episodes-grid"></div>
+    </section>
+
+    <!-- Lab Ordering View -->
+    <section id="labOrderView" class="view">
+      <button id="backToPatient" class="btn-back">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M12 4l-8 6 8 6V4z"/>
+        </svg>
+        Back to Episodes
+      </button>
+
+      <div class="order-header">
+        <div class="order-info-card">
+          <div class="order-meta">
+            <span><strong>Patient:</strong> <span id="orderPatientName">-</span></span>
+            <span><strong>Episode:</strong> <span id="orderEpisodeInfo">-</span></span>
+            <span><strong>Doctor:</strong> <span id="orderDoctorName">-</span></span>
+          </div>
+          <div id="episodeSummary" class="order-meta-summary"></div>
+        </div>
+      </div>
+
+      <div class="lab-content-wrapper">
+        
+        <div class="lab-catalog-section">
+          <iframe id="labCatalogFrame" src="lab-catalog.html"></iframe>
+        </div>
+
+        <div class="order-sidebar open" id="orderSidebar">
+          <div class="order-sidebar-header">
+            <div>
+              <h4>Selected Tests</h4>
+              <span class="order-sidebar-count" id="orderSidebarCount">0 tests</span>
+            </div>
+            <button class="sidebar-close-btn" id="sidebarCloseBtn" title="Close cart">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="order-sidebar-body" id="orderSidebarBody">
+            <p class="sidebar-empty">No tests selected yet. Check tests from the catalog to add them.</p>
+          </div>
+          <div class="order-sidebar-footer">
+            <button id="clearOrderSelection" class="btn-clear-order">Clear All</button>
+            <button id="quickBundleBtn" class="btn-bundle-quick" title="Quickly apply a saved bundle">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M3 3h10v2H3V3zm0 4h10v2H3V7zm0 4h10v2H3v-2z"/>
+              </svg>
+              Apply Bundle
+            </button>
+            <button id="submitOrderButton" class="btn-submit" disabled>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2l8 16H2L10 2z"/>
+              </svg>
+              Submit Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Catalog View (Read-only for browsing) -->
+    <section id="catalogView" class="view">
+      <div class="catalog-view-header">
+        <h2>Laboratory Test Catalog</h2>
+        <p class="catalog-view-subtitle">Browse all available tests from Male' City Group of Hospitals - Hulhumale' Hospital. View test codes, ASND mappings, and Vinavi IDs.</p>
+      </div>
+      <div class="catalog-view-container">
+        <iframe id="labCatalogFrameReadonly" src="lab-catalog.html" title="HMH Laboratory Test Catalog - Read Only"></iframe>
+      </div>
+    </section>
+
+    <!-- Packages / Bundles View (now includes embedded catalog for direct selection) -->
+    <section id="packagesView" class="view">
+      <div class="packages-hero">
+        <div class="packages-hero-background"></div>
+        <div class="packages-hero-content">
+          <div class="packages-hero-text">
+            <div class="packages-title-wrapper">
+              <div class="packages-icon-large">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 2v2H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-2V2H9z" fill="currentColor" opacity="0.2"/>
+                  <rect x="8" y="1" width="8" height="3" rx="1" fill="currentColor"/>
+                  <path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="packages-title">Lab Test Bundles</h2>
+                <p class="packages-subtitle">Create, manage, and quickly order pre-configured test packages</p>
+              </div>
+            </div>
+            <div class="packages-stats">
+              <div class="stat-item">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9 2v2H7c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-2V2H9z" opacity="0.5"/>
+                  <rect x="8" y="1" width="4" height="2" rx="0.5" fill="currentColor"/>
+                </svg>
+                <span id="bundlesCount">0 Bundles</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M3 3h14v14H3V3z" opacity="0.3"/>
+                  <path d="M6 7h8M6 10h8M6 13h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span id="testsCount">0 Tests</span>
+              </div>
+            </div>
+          </div>
+          <div class="packages-hero-actions">
+            <button id="openPackageBuilder" class="btn-create-bundle">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              Create Bundle
+            </button>
+            <button id="viewAllBundlesBtn" class="btn-view-bundles">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="3" y="3" width="6" height="6" rx="1" fill="currentColor" opacity="0.3"/>
+                <rect x="11" y="3" width="6" height="6" rx="1" fill="currentColor" opacity="0.3"/>
+                <rect x="3" y="11" width="6" height="6" rx="1" fill="currentColor" opacity="0.3"/>
+                <rect x="11" y="11" width="6" height="6" rx="1" fill="currentColor" opacity="0.3"/>
+              </svg>
+              View All
+            </button>
+            <button id="exportBundlesBtn" class="btn-view-bundles" title="Export bundles to JSON file">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M3 14v3c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M10 3v10M6 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Export
+            </button>
+            <button id="importBundlesBtn" class="btn-view-bundles" title="Import bundles from JSON file">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M3 14v3c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M10 13V3M6 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Import
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="packages-content">
+        <div class="packages-quick-access">
+          <div class="quick-access-header">
+            <h3>Quick Actions</h3>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <path d="M9 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/>
+            </svg>
+          </div>
+          <div class="quick-access-grid">
+            <button class="quick-action-card" id="quickCreateBundle">
+              <div class="quick-action-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.1"/>
+                  <path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="quick-action-text">
+                <strong>New Bundle</strong>
+                <span>Create from scratch</span>
+              </div>
+            </button>
+            <button class="quick-action-card" id="quickViewBundles">
+              <div class="quick-action-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.1"/>
+                  <path d="M3 12h18M12 3v18" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+                  <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="quick-action-text">
+                <strong>Browse All</strong>
+                <span>View saved bundles</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="packages-info-cards">
+          <div class="info-card info-card-blue">
+            <div class="info-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10" opacity="0.2"/>
+                <text x="12" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">1</text>
+              </svg>
+            </div>
+            <div class="info-card-content">
+              <h4>Create Your Bundle</h4>
+              <p>Click "Create Bundle" button, name your test package, and select tests from the catalog</p>
+            </div>
+          </div>
+          <div class="info-card info-card-green">
+            <div class="info-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10" opacity="0.2"/>
+                <text x="12" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">2</text>
+              </svg>
+            </div>
+            <div class="info-card-content">
+              <h4>Search Patient</h4>
+              <p>Use the patient search to find and select the patient who needs lab tests</p>
+            </div>
+          </div>
+          <div class="info-card info-card-purple">
+            <div class="info-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10" opacity="0.2"/>
+                <text x="12" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">3</text>
+              </svg>
+            </div>
+            <div class="info-card-content">
+              <h4>Select Episode & Order</h4>
+              <p>Choose the patient's episode, open Lab Order section, and apply your bundle with one click</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="package-catalog-embed" style="display: none;">
+        <h3 class="embed-title">Catalog</h3>
+        <iframe id="labCatalogFramePackages" src="lab-catalog.html" title="Lab Catalog for Bundles"></iframe>
+        <p class="embed-hint">Select tests using the checkboxes; they appear in the global selection and can be saved as a bundle when you open the builder.</p>
+      </div>
+    </section>
+
+    <!-- Failed Tests Log View -->
+    <section id="failLogView" class="view">
+      <div class="fail-log-header">
+        <h2>Failed Test Submissions</h2>
+        <div class="fail-log-actions">
+          <button id="refreshFailLog" class="fail-log-btn" type="button">Refresh</button>
+          <button id="clearFailLog" class="fail-log-btn danger" type="button">Clear Log</button>
+        </div>
+      </div>
+      <p class="fail-log-subtle">This log records any items that could not be pushed to Vinavi (lab tests, medications, medical advice). Review errors to troubleshoot issues.</p>
+      <div class="fail-log-table-wrapper">
+        <table class="fail-log-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Episode</th>
+              <th>Type</th>
+              <th>Item Name</th>
+              <th>ASND</th>
+              <th>Vinavi ID</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="failLogBody">
+            <tr class="empty-row"><td colspan="7">No failures recorded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Settings View -->
+    <section id="settingsView" class="view">
+      <div class="settings-container">
+        <div class="settings-section">
+          <h3>API Configuration</h3>
+          <div class="settings-group">
+            <label>Auth URL</label>
+            <input type="text" id="authUrlSetting" value="https://auth.aasandha.mv" readonly>
+          </div>
+          <div class="settings-group">
+            <label>Vinavi URL</label>
+            <input type="text" id="vinaviUrlSetting" value="https://vinavi.aasandha.mv" readonly>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Connection Status</h3>
+          <div class="connection-status">
+            <div class="status-item">
+              <span>Authentication</span>
+              <span id="authStatus" class="status-badge">Checking...</span>
+            </div>
+            <div class="status-item">
+              <span>Vinavi API</span>
+              <span id="vinaviStatus" class="status-badge">Checking...</span>
+            </div>
+          </div>
+          <button id="testConnection" class="btn-primary">Test Connection</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content success-modal-content">
+      <div class="success-modal-icon">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="34" fill="#10b981" opacity="0.1"/>
+          <circle cx="36" cy="36" r="28" fill="#10b981"/>
+          <path d="M24 36l10 10 14-20" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="success-modal-title">Lab Order Submitted Successfully!</h3>
+      <p id="successMessage" class="success-modal-message">Your lab order has been submitted to Vinavi portal.</p>
+      <div class="modal-actions">
+        <button id="closeSuccessModal" class="btn-success-modal">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Backdrop -->
+  <div id="toastBackdrop" class="toast-backdrop hidden"></div>
+  
+  <!-- Error Toast -->
+  <div id="errorToast" class="toast hidden">
+    <button class="toast-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="toast-icon"></div>
+    <div class="toast-message"></div>
+  </div>
+
+  <!-- Bundle Name Wizard Modal -->
+  <div id="bundleNameWizard" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content wizard-modal-content">
+      <button id="closeBundleNameWizard" class="wizard-close-btn" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+        </svg>
+      </button>
+      
+      <div class="wizard-header">
+        <div class="wizard-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="url(#wizardGrad)" opacity="0.2"/>
+            <path d="M18 8v4h-4c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h20c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4h-4V8h-12z" fill="url(#wizardGrad)"/>
+            <rect x="16" y="6" width="16" height="6" rx="2" fill="url(#wizardGrad2)"/>
+            <defs>
+              <linearGradient id="wizardGrad" x1="10" y1="8" x2="38" y2="40" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#2563eb"/>
+              </linearGradient>
+              <linearGradient id="wizardGrad2" x1="16" y1="6" x2="32" y2="12" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#60a5fa"/>
+                <stop offset="100%" stop-color="#3b82f6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h3 class="wizard-title">Create New Bundle</h3>
+        <p class="wizard-subtitle">Set up a reusable test package for faster ordering</p>
+      </div>
+
+      <div class="wizard-body">
+        <div class="wizard-input-section">
+          <label for="bundleNameWizardInput" class="wizard-label">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <path d="M3 3h12v2H3V3zm0 4h12v2H3V7zm0 4h8v2H3v-2z"/>
+            </svg>
+            Bundle Name
+          </label>
+          <input 
+            type="text" 
+            id="bundleNameWizardInput" 
+            class="wizard-input" 
+            placeholder="e.g., Diabetic Follow-up Panel" 
+            autocomplete="off" 
+          />
+          <p class="wizard-hint">Choose a descriptive name that's easy to identify later</p>
+        </div>
+
+        <div class="wizard-process-steps">
+          <h4 class="process-steps-title">How It Works</h4>
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <strong>Name Your Bundle</strong>
+              <span>Enter a clear, descriptive name for this test package</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <strong>Select Tests</strong>
+              <span>Browse the catalog and choose tests to include in the bundle</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>Save Bundle</strong>
+              <span>Your bundle is saved and ready for quick ordering anytime</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <strong>Use in Patient Episodes</strong>
+              <span>Search for a patient, select their episode, and order the entire bundle with one click</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-actions">
+        <button id="cancelBundleNameWizard" class="wizard-btn wizard-btn-cancel">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+            <path d="M9 1.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM6 8.25h6v1.5H6v-1.5z"/>
+          </svg>
+          Cancel
+        </button>
+        <button id="nextBundleNameWizard" class="wizard-btn wizard-btn-next">
+          Continue to Test Selection
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+            <path d="M9 3l6 6-6 6-1.5-1.5L11.25 9 7.5 4.5 9 3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bundle Selection Modal -->
+  <div id="bundleModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content bundle-modal-content">
+      <div class="modal-header">
+        <h3>Select Tests for <span id="bundleModalTitle">Bundle</span></h3>
+        <button id="closeBundleModal" class="modal-close-btn" aria-label="Close">&times;</button>
+      </div>
+      <div class="bundle-modal-body">
+        <div class="bundle-modal-layout">
+          <div class="bundle-catalog-section">
+            <iframe id="labCatalogFrameBundleModal" src="lab-catalog.html" title="Lab Catalog for Bundle Creation"></iframe>
+          </div>
+          <div class="bundle-selection-sidebar">
+            <div class="sidebar-header">
+              <h4>Selected Tests</h4>
+              <span class="sidebar-count" id="bundleSidebarCount">0 tests</span>
+            </div>
+            <div class="sidebar-body" id="bundleSidebarBody">
+              <p class="sidebar-empty">No tests selected yet. Check tests from the catalog to add them.</p>
+            </div>
+            <div class="sidebar-footer">
+              <button id="clearBundleSelection" class="btn-clear">Clear All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="cancelBundleModal" class="btn-secondary">Cancel</button>
+        <button id="saveBundleFromModal" class="btn-primary">Save Bundle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bundles List Modal -->
+  <div id="bundlesListModal" class="modal-overlay hidden">
+    <div class="bundles-list-modal-content">
+      <div class="bundles-list-header">
+        <h3>Your Lab Bundles</h3>
+        <button id="closeBundlesListModal" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="bundles-list-body">
+        <div id="packagesGrid" class="packages-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinical Set Builder Modal -->
+  <div id="setBuilderModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content" style="max-width: 95vw !important; width: 1400px !important; max-height: 95vh; overflow: hidden; display: flex; flex-direction: column;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); color: white; padding: 20px 32px;">
+        <h3 id="setBuilderTitle" style="color: white; font-size: 20px; font-weight: 600; margin: 0;">Create Clinical Set</h3>
+        <button id="closeSetBuilder" class="modal-close-btn" aria-label="Close" style="color: white; font-size: 28px; opacity: 0.9;">&times;</button>
+      </div>
+      
+      <div style="padding: 32px; overflow-y: auto; flex: 1; background: #f9fafb;">
+        <!-- Set Name -->
+        <div style="margin-bottom: 32px; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <label style="display: block; font-weight: 600; margin-bottom: 10px; color: #1f2937; font-size: 15px;">Set Name *</label>
+          <input type="text" id="setNameInput" placeholder="e.g., Upper Respiratory Tract Infection" style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 15px; transition: all 0.2s;">
+        </div>
+
+        <!-- Tabs for different sections -->
+        <div class="set-builder-tabs" style="display: flex; gap: 12px; background: white; padding: 0 24px; border-radius: 12px 12px 0 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 0;">
+          <button class="set-tab active" data-tab="labs" style="padding: 16px 32px; background: none; border: none; border-bottom: 3px solid #2563eb; font-weight: 600; color: #2563eb; cursor: pointer; font-size: 15px; transition: all 0.2s;">
+            🧪 Lab Tests
+          </button>
+          <button class="set-tab" data-tab="medications" style="padding: 16px 32px; background: none; border: none; border-bottom: 3px solid transparent; font-weight: 600; color: #6b7280; cursor: pointer; font-size: 15px; transition: all 0.2s;">
+            💊 Medications
+          </button>
+          <button class="set-tab" data-tab="advice" style="padding: 16px 32px; background: none; border: none; border-bottom: 3px solid transparent; font-weight: 600; color: #6b7280; cursor: pointer; font-size: 15px; transition: all 0.2s;">
+            📋 Medical Advice
+          </button>
+        </div>
+
+        <!-- Labs Section -->
+        <div id="setLabsSection" class="set-section" style="display: block; background: white; padding: 32px; border-radius: 0 12px 12px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="margin-bottom: 24px;">
+            <h4 style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 10px;">Select Lab Tests</h4>
+            <p style="font-size: 15px; color: #6b7280;">Choose tests from the catalog below - check boxes to add to your set</p>
+          </div>
+          <div style="border: 2px solid #e5e7eb; border-radius: 12px; height: 700px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+            <iframe id="setLabCatalogFrame" src="lab-catalog.html" style="width: 100%; height: 100%; border: none;"></iframe>
+          </div>
+          <div id="setSelectedLabs" style="margin-top: 24px; padding: 20px; background: #eff6ff; border: 2px solid #3b82f6; border-radius: 12px; min-height: 80px;">
+            <div style="font-weight: 600; margin-bottom: 12px; color: #1e40af; font-size: 15px;">✓ Selected Labs: <span id="setLabCount" style="background: #3b82f6; color: white; padding: 2px 10px; border-radius: 12px; font-size: 14px;">0</span></div>
+            <div id="setLabsList" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+          </div>
+        </div>
+
+        <!-- Medications Section with Side Cart Layout -->
+        <div id="setMedicationsSection" class="set-section" style="display: none; background: white; padding: 32px; border-radius: 0 12px 12px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="display: flex; gap: 24px; height: 600px;">
+            
+            <!-- LEFT: Search Area -->
+            <div style="flex: 1; display: flex; flex-direction: column;">
+              <div style="margin-bottom: 20px;">
+                <h4 style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 8px;">🔍 Search Medications</h4>
+                <p style="font-size: 14px; color: #6b7280;">Search and select medicines from the database</p>
+              </div>
+              
+              <!-- Search Input -->
+              <div style="margin-bottom: 20px;">
+                <div style="position: relative;">
+                  <input 
+                    type="text" 
+                    id="medicineSearchInput" 
+                    placeholder="Type medicine name (e.g., Fexofen, Paracetamol...)" 
+                    autocomplete="off"
+                    style="width: 100%; padding: 14px 50px 14px 16px; border: 2px solid #3b82f6; border-radius: 10px; font-size: 15px; transition: all 0.2s; background: white;">
+                  <svg width="22" height="22" viewBox="0 0 20 20" fill="#3b82f6" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+                    <path d="M9 2a7 7 0 105.618 11.247l4.567 4.568 1.415-1.415-4.568-4.567A7 7 0 009 2zm0 2a5 5 0 110 10A5 5 0 019 4z"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Search Results - Scrollable -->
+              <div id="medicineSearchResults" style="flex: 1; overflow-y: auto; border: 2px solid #e5e7eb; border-radius: 10px; background: #f9fafb; padding: 16px;">
+                <div style="text-align: center; padding: 40px 20px; color: #9ca3af;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin: 0 auto 16px;">
+                    <path d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p style="font-size: 15px; font-weight: 500;">Start typing to search medicines</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: Medicine Cart -->
+            <div style="width: 420px; background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 2px solid #10b981; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
+              
+              <!-- Cart Header -->
+              <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid #86efac;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <h4 style="font-size: 17px; font-weight: 700; color: #065f46; margin: 0;">🛒 Medicine Cart</h4>
+                  <span id="setMedicationCount" style="background: #10b981; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 600;">0</span>
+                </div>
+              </div>
+
+              <!-- Selected Medicine Form (when selecting) -->
+              <div id="selectedMedicineDetails" style="display: none; margin-bottom: 20px; padding: 20px; background: white; border: 2px solid #10b981; border-radius: 10px;">
+                <div style="margin-bottom: 16px;">
+                  <div style="font-weight: 600; font-size: 16px; color: #065f46; margin-bottom: 4px;" id="selectedMedicineName"></div>
+                  <div style="font-size: 13px; color: #059669; font-weight: 500;" id="selectedMedicineGeneric"></div>
+                  <div id="selectedMedicineDetails2" style="font-size: 12px; color: #6b7280; margin-top: 6px;"></div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <label style="display: block; font-weight: 600; font-size: 13px; color: #065f46; margin-bottom: 8px;">Instructions *</label>
+                  <textarea 
+                    id="selectedMedicineInstructions" 
+                    placeholder="e.g., 1 tablet twice daily after meals for 7 days"
+                    rows="3"
+                    style="width: 100%; padding: 10px; border: 2px solid #86efac; border-radius: 6px; font-size: 13px; resize: vertical; font-family: inherit;"></textarea>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button id="addSelectedMedicineBtn" style="flex: 1; padding: 10px; font-size: 14px; font-weight: 600; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    ✓ Add
+                  </button>
+                  <button id="clearMedicineSelection" style="padding: 10px 16px; font-size: 14px; font-weight: 600; background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer;">
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cart Items List -->
+              <div style="flex: 1; overflow-y: auto; margin-bottom: 16px;">
+                <div id="setMedicationsItems" style="display: flex; flex-direction: column; gap: 10px;">
+                  <!-- Empty state -->
+                  <div id="medicineCartEmpty" style="text-align: center; padding: 60px 20px; color: #9ca3af;">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin: 0 auto 16px; opacity: 0.4;">
+                      <path d="M9 2a1 1 0 011-1h4a1 1 0 011 1v1h3a1 1 0 011 1v2H5V4a1 1 0 011-1h3V2z" stroke-width="2"/>
+                      <path d="M3 6h18v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6z" stroke-width="2"/>
+                    </svg>
+                    <p style="font-size: 14px; font-weight: 500;">No medicines added yet</p>
+                    <p style="font-size: 12px; margin-top: 4px;">Search and select medicines</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cart Footer Stats -->
+              <div style="padding-top: 16px; border-top: 2px solid #86efac;">
+                <div style="font-size: 13px; color: #059669; font-weight: 600;">
+                  Total Medicines: <span id="setMedicationCount2" style="color: #065f46;">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Medical Advice Section -->
+        <div id="setAdviceSection" class="set-section" style="display: none; background: white; padding: 32px; border-radius: 0 12px 12px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <div style="margin-bottom: 24px;">
+            <h4 style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 10px;">📋 Medical Advice</h4>
+            <p style="font-size: 15px; color: #6b7280;">Add medical advice notes that will be pushed to the patient's episode</p>
+          </div>
+          
+          <!-- Advice Input -->
+          <div style="margin-bottom: 24px;">
+            <textarea 
+              id="setAdviceInput" 
+              placeholder="Enter medical advice (e.g., Avoid cold water and spicy food. Drink plenty of water. Get proper rest...)"
+              rows="8"
+              style="width: 100%; padding: 16px; border: 2px solid #f59e0b; border-radius: 10px; font-size: 15px; resize: vertical; font-family: inherit; line-height: 1.6;"></textarea>
+            <p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">💡 Tip: Each line will be treated as a separate advice point</p>
+          </div>
+
+          <!-- Quick Templates -->
+          <div style="margin-bottom: 24px;">
+            <h5 style="font-size: 14px; font-weight: 600; color: #6b7280; margin-bottom: 12px;">Quick Templates:</h5>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+              <button class="advice-template-btn" data-template="Avoid cold water and spicy food.\nDrink plenty of water/ORS.\nGet proper rest.\nFollow up (as needed)." style="padding: 8px 14px; font-size: 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; color: #92400e;">🤒 General Fever</button>
+              <button class="advice-template-btn" data-template="Gargle with luke warm salt water 3 times/day.\nWear mask.\nUse lozenges/honey.\nAvoid cold drinks.\nGet proper rest." style="padding: 8px 14px; font-size: 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; color: #92400e;">🤧 Sore Throat</button>
+              <button class="advice-template-btn" data-template="Steam inhalation twice daily.\nDrink warm fluids.\nAvoid dust and smoke.\nUse nasal saline drops.\nRest and elevate head while sleeping." style="padding: 8px 14px; font-size: 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; color: #92400e;">🤧 Cold/Cough</button>
+              <button class="advice-template-btn" data-template="Eat small, frequent meals.\nAvoid spicy/oily food.\nDrink plenty of water.\nTake rest.\nFollow up if symptoms persist." style="padding: 8px 14px; font-size: 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; color: #92400e;">🤢 Gastric</button>
+              <button class="advice-template-btn" data-template="Apply cold/warm compress.\nTake medications as prescribed.\nRest adequately.\nAvoid stress.\nFollow up if not improving." style="padding: 8px 14px; font-size: 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; color: #92400e;">🤕 Headache</button>
+            </div>
+            
+            <!-- Ortho/Physiotherapy Templates -->
+            <h5 style="font-size: 14px; font-weight: 600; color: #f59e0b; margin-bottom: 12px; margin-top: 16px;">🦴 Orthopedics & Physiotherapy:</h5>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <button class="advice-template-btn" data-template="Shoulder Physiotherapy - ROM of the shoulder, Stretching and strengthening of the rotator cuff muscles x 7 days." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Shoulder Pain</button>
+              <button class="advice-template-btn" data-template="Knee Physiotherapy - Knee Range of Motion Exercises, Quadriceps Strengthening exercises, Gastrocnemius / Hamstring strengthening exercises x 7 days.\nDo low-impact activities (walking, swimming).\nModify Activities: Avoid kneeling or squatting. Take breaks when sitting or standing.\nSupport Devices: Wear a knee brace when pain is severe and supportive shoes. Use a cane if needed.\nMonitor Symptoms: Track pain and if worsen follow up as soon as possible." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦵 Knee Pain</button>
+              <button class="advice-template-btn" data-template="Neck Physiotherapy - TENS around upper back x 7 days; followed by Isometric neck exercises x 7 days." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Neck Pain</button>
+              <button class="advice-template-btn" data-template="Back Physiotherapy - TENS x 7 days followed by Low back and core muscle strengthening exercises x 7 days.\nDo not do heavy lifting and activities involving forward bending for 2 weeks." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Low Back Pain</button>
+              <button class="advice-template-btn" data-template="Physiotherapy - TENS x 7 days followed by Low back and core muscle strengthening exercises x 3 weeks.\nDo not sit on hard surfaces for a prolonged period. Use soft cushions / Coccydynia pillow." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Coccydynia</button>
+              <button class="advice-template-btn" data-template="Foot Physiotherapy - ESWT x 7 days followed by plantar stretching exercise 7 days.\nWear Silicone insole inside shoes." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦶 Plantar Fasciitis</button>
+              <button class="advice-template-btn" data-template="Elbow Physiotherapy for Tennis elbow - Heat therapy x 7 days followed by stretching of the common extensor muscles x 7 days." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">💪 Tennis Elbow</button>
+              <button class="advice-template-btn" data-template="Osteoporosis: Take calcium 1000-1200mg and Vitamin D 800-1000 IU daily.\nRegular weight-bearing exercises.\nFall prevention measures at home.\nAvoid smoking and excessive alcohol." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Osteoporosis</button>
+              <button class="advice-template-btn" data-template="Osteoarthritis: Weight management is essential.\nLow-impact exercises like swimming and cycling recommended.\nApply heat for stiffness, cold for acute pain.\nUse assistive devices when needed.\nAvoid prolonged standing or sitting. Change positions frequently." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Osteoarthritis</button>
+              <button class="advice-template-btn" data-template="Frozen Shoulder: Pendulum exercises and wall climbing exercises daily.\nHeat application before exercises." style="padding: 8px 14px; font-size: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; cursor: pointer; color: #92400e;">🦴 Frozen Shoulder</button>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div id="setAdvicePreview" style="padding: 20px; background: #fffbeb; border: 2px solid #f59e0b; border-radius: 12px; min-height: 80px;">
+            <div style="font-weight: 600; margin-bottom: 12px; color: #92400e; font-size: 15px;">📋 Advice Preview: <span id="setAdviceCount" style="background: #f59e0b; color: white; padding: 2px 10px; border-radius: 12px; font-size: 14px;">0</span> lines</div>
+            <div id="setAdviceList" style="color: #78350f; font-size: 14px; line-height: 1.8;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions" style="padding: 24px 32px; border-top: 2px solid #e5e7eb; background: #f9fafb; display: flex; gap: 16px; justify-content: flex-end;">
+        <button id="cancelSetBuilder" class="btn-secondary" style="padding: 14px 32px; font-size: 15px; font-weight: 600; border: 2px solid #d1d5db; background: white; color: #6b7280; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Cancel</button>
+        <button id="saveSetBuilder" class="btn-primary" style="padding: 14px 40px; font-size: 16px; font-weight: 600; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: white; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transition: all 0.2s;">💾 Save Clinical Set</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/service-map.js"></script>
+  <script src="scripts/routine-service-prefill.js"></script>
+  <script src="scripts/sets.js"></script>
+  <script src="scripts/packages.js"></script>
+  <script src="scripts/medicine-database.js"></script>
+  <script src="scripts/fullscreen-catalog.js"></script>
+  <script src="scripts/dashboard.js"></script>
+</body>
+</html>

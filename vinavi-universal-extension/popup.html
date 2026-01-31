@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vinavi Universal Helper</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.06);
+      --text: #e5e7eb;
+      --muted: rgba(229,231,235,0.72);
+      --border: rgba(255,255,255,0.10);
+      --accent1: #22c55e;
+      --accent2: #60a5fa;
+      --accent3: #a78bfa;
+    }
+
+    html, body { margin: 0; padding: 0; }
+    body {
+      width: 360px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 500px at 20% 0%, rgba(96,165,250,0.25), transparent 60%),
+                  radial-gradient(900px 400px at 90% 10%, rgba(167,139,250,0.22), transparent 55%),
+                  linear-gradient(180deg, #0b1220, #070b12);
+      color: var(--text);
+    }
+
+    .wrap { padding: 14px; }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border-radius: 14px;
+      margin-bottom: 12px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(34,197,94,0.35), rgba(96,165,250,0.35));
+      border: 1px solid rgba(255,255,255,0.10);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+
+    .cardHead {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .cardIcon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .cardIcon.quick { background: linear-gradient(135deg, rgba(34,197,94,0.18), rgba(34,197,94,0.06)); }
+    .cardIcon.lab { background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(96,165,250,0.06)); }
+
+    .title { font-size: 14px; font-weight: 700; line-height: 1.1; }
+    .subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .card h3 { margin: 0; font-size: 13px; }
+    .card p { margin: 6px 0 10px; font-size: 12px; color: var(--muted); }
+
+    .btnRow { display: flex; gap: 8px; }
+
+    button {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      flex: 1;
+    }
+
+    button:hover { background: rgba(255,255,255,0.10); }
+
+    .primaryQuick { border-color: rgba(34,197,94,0.40); }
+    .primaryLab { border-color: rgba(96,165,250,0.45); }
+
+    .small {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .small button {
+      flex: 1;
+      padding: 9px 10px;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    .footer {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(229,231,235,0.55);
+    }
+
+    .footerActions {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .footerActions button {
+      padding: 9px 10px;
+      font-weight: 650;
+      opacity: 0.98;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="logo">V</div>
+      <div>
+        <div class="title">Vinavi Universal Helper</div>
+        <div class="subtitle">Choose what you want to open</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="cardHead">
+          <div class="cardIcon quick">✍️</div>
+          <h3>Quick Text</h3>
+        </div>
+        <p>Shortcut suggestions + popup fields + apply into Vinavi notes.</p>
+        <div class="btnRow">
+          <button id="openQuick" class="primaryQuick">Open Quick Text</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardHead">
+          <div class="cardIcon lab">🧪</div>
+          <h3>Lab Integration</h3>
+        </div>
+        <p>HMH lab dashboard + catalog + ordering helpers.</p>
+        <div class="btnRow">
+          <button id="openLab" class="primaryLab">Open Lab Dashboard</button>
+        </div>
+        <div class="small">
+          <button id="openSave">Save Files</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Runs both systems without mixing UI/state.</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,988 @@
+/* Vinavi Quick Text - Content Script Styles */
+/* Blue/Teal Theme - Modern UI */
+
+/* Popup Overlay */
+.vinavi-popup-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(4px);
+  z-index: 2147483646 !important;
+  animation: vinaviFadeIn 0.2s ease;
+}
+
+/* Main Popup Form */
+.vinavi-popup {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  min-width: 700px;
+  max-width: 850px;
+  max-height: 85vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  animation: vinaviSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes vinaviFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vinaviSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.vinavi-popup-header {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%) !important;
+  color: white !important;
+  padding: 18px 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.vinavi-popup-icon {
+  font-size: 28px !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.vinavi-popup-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.3px;
+}
+
+.vinavi-popup-close {
+  margin-left: auto !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: none !important;
+  color: white !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.vinavi-popup-close:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.1) !important;
+}
+
+.vinavi-popup-body {
+  padding: 24px 32px !important;
+  max-height: 60vh !important;
+  overflow-y: auto !important;
+  background: #ffffff !important;
+}
+
+.vinavi-popup-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.vinavi-popup-body::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.vinavi-popup-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.vinavi-field-group {
+  margin-bottom: 0 !important;
+}
+
+.vinavi-fields-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px 20px !important;
+}
+
+/* Full width fields take entire row */
+.vinavi-field-full {
+  grid-column: 1 / -1 !important;
+}
+
+/* Number input with unit */
+.vinavi-number-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.vinavi-number-wrapper input {
+  flex: 1 !important;
+}
+
+.vinavi-number-unit {
+  font-size: 12px !important;
+  color: #64748b !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+/* Textarea for full-width text fields */
+.vinavi-field-textarea {
+  width: 100% !important;
+  min-height: 80px !important;
+  padding: 10px 12px !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  color: #1e293b !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  resize: vertical !important;
+}
+
+.vinavi-field-textarea:hover {
+  border-color: #cbd5e1 !important;
+}
+
+.vinavi-field-textarea:focus {
+  outline: none !important;
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15) !important;
+}
+
+.vinavi-field-label {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+  margin-bottom: 5px !important;
+}
+
+/* Main Label & Sub Label Section Headers */
+.vinavi-mainlabel-header {
+  grid-column: 1 / -1 !important;
+  margin: 20px 0 16px 0 !important;
+  padding: 12px 16px !important;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2) !important;
+}
+
+.vinavi-mainlabel-text {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: white !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.vinavi-sublabel-header {
+  grid-column: 1 / -1 !important;
+  margin: 16px 0 12px 0 !important;
+  padding-bottom: 8px !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+.vinavi-sublabel-text {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0ea5e9 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.vinavi-field-select,
+.vinavi-field-input {
+  width: 100% !important;
+  padding: 9px 11px !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  color: #1e293b !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.vinavi-field-select:hover,
+.vinavi-field-input:hover {
+  border-color: #cbd5e1 !important;
+}
+
+.vinavi-field-select:focus,
+.vinavi-field-input:focus {
+  outline: none !important;
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15) !important;
+}
+
+.vinavi-field-select {
+  cursor: pointer !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 18px !important;
+  padding-right: 40px !important;
+}
+
+.vinavi-checkbox-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 9px 12px !important;
+  background: #f8fafc !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+}
+
+.vinavi-checkbox-wrapper:hover {
+  background: #f1f5f9 !important;
+}
+
+.vinavi-checkbox {
+  width: 20px !important;
+  height: 20px !important;
+  accent-color: #0ea5e9 !important;
+  cursor: pointer !important;
+}
+
+.vinavi-checkbox-label {
+  font-size: 13px !important;
+  color: #334155 !important;
+  cursor: pointer !important;
+}
+
+/* Multi-select checkboxes */
+.vinavi-multiselect-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  padding: 12px !important;
+  background: #f8fafc !important;
+  border-radius: 8px !important;
+  border: 2px solid #e2e8f0 !important;
+}
+
+.vinavi-multiselect-option {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 10px !important;
+  background: white !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.vinavi-multiselect-option:hover {
+  background: #f1f5f9 !important;
+  transform: translateX(2px) !important;
+}
+
+.vinavi-multiselect-checkbox {
+  width: 18px !important;
+  height: 18px !important;
+  accent-color: #0ea5e9 !important;
+  cursor: pointer !important;
+}
+
+.vinavi-multiselect-label {
+  font-size: 13px !important;
+  color: #334155 !important;
+  cursor: pointer !important;
+  flex: 1 !important;
+  white-space: pre-line !important;
+}
+
+.vinavi-popup-footer {
+  padding: 16px 24px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: flex-end !important;
+}
+
+.vinavi-btn {
+  padding: 12px 24px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+  font-family: inherit !important;
+}
+
+.vinavi-btn-primary {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4) !important;
+}
+
+.vinavi-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5) !important;
+}
+
+.vinavi-btn-secondary {
+  background: white !important;
+  color: #64748b !important;
+  border: 2px solid #e2e8f0 !important;
+}
+
+.vinavi-btn-secondary:hover {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Suggestion Dropdown */
+.vinavi-suggestions {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  min-width: 300px !important;
+  max-width: 400px !important;
+  overflow: hidden !important;
+  animation: vinaviSlideUp 0.2s ease !important;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+.vinavi-suggestions-header {
+  padding: 14px 18px !important;
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%) !important;
+  color: white !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.vinavi-suggestion-item {
+  padding: 14px 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  background: white !important;
+  color: #1e293b !important;
+}
+
+.vinavi-suggestion-item:last-child {
+  border-bottom: none !important;
+}
+
+.vinavi-suggestion-item:hover {
+  background: rgba(14, 165, 233, 0.08) !important;
+}
+
+.vinavi-suggestion-item.selected {
+  background: rgba(14, 165, 233, 0.15) !important;
+}
+
+.vinavi-suggestion-icon {
+  font-size: 24px !important;
+}
+
+.vinavi-suggestion-text {
+  flex: 1 !important;
+}
+
+.vinavi-suggestion-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+}
+
+.vinavi-suggestion-shortcut {
+  font-size: 12px !important;
+  color: #0ea5e9 !important;
+  font-family: 'Consolas', 'Monaco', monospace !important;
+}
+
+.vinavi-suggestion-kbd {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%) !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/* Toast Notification */
+.vinavi-toast {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 2147483647 !important;
+  background: #1e293b !important;
+  color: white !important;
+  padding: 14px 20px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+  animation: vinaviToastIn 0.3s ease, vinaviToastOut 0.3s ease 2.7s forwards !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+.vinavi-toast-icon {
+  font-size: 18px !important;
+}
+
+@keyframes vinaviToastIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vinaviToastOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+
+/* Medication Dosage Vertical Options */
+.vinavi-med-options {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.vinavi-med-option {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 14px 18px !important;
+  background: #f8fafc !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-align: left !important;
+  font-family: inherit !important;
+}
+
+.vinavi-med-option:hover {
+  background: #f1f5f9 !important;
+  border-color: #0ea5e9 !important;
+  transform: translateX(4px) !important;
+}
+
+.vinavi-med-option.selected {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%) !important;
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2) !important;
+}
+
+.vinavi-med-radio {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  border: 2px solid #cbd5e1 !important;
+  background: white !important;
+  position: relative !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.vinavi-med-option.selected .vinavi-med-radio {
+  border-color: #0ea5e9 !important;
+  background: #0ea5e9 !important;
+}
+
+.vinavi-med-option.selected .vinavi-med-radio::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: white !important;
+  border-radius: 50% !important;
+}
+
+.vinavi-med-text {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+}
+
+.vinavi-med-option.selected .vinavi-med-text {
+  color: #0ea5e9 !important;
+}
+
+/* Column Layouts for Main Labels */
+.vinavi-layout-2col {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}
+
+.vinavi-layout-3col {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 20px !important;
+}
+
+/* In column layouts, main label headers take full column width */
+.vinavi-layout-2col .vinavi-mainlabel-header,
+.vinavi-layout-3col .vinavi-mainlabel-header {
+  grid-column: auto !important;
+  margin: 0 0 12px 0 !important;
+}
+
+/* Each main label section in column layout */
+.vinavi-mainlabel-section {
+  display: flex !important;
+  flex-direction: column !important;
+  background: #f8fafc !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  border: 2px solid #e2e8f0 !important;
+}
+
+.vinavi-layout-2col .vinavi-mainlabel-section,
+.vinavi-layout-3col .vinavi-mainlabel-section {
+  break-inside: avoid !important;
+}
+
+/* In column layouts, fields stack vertically within each column */
+.vinavi-mainlabel-section .vinavi-field-group {
+  width: 100% !important;
+  grid-column: auto !important;
+}
+
+/* Main label fields container */
+.vinavi-mainlabel-fields {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+/* ============================================
+   THEME VARIATIONS FOR POPUP
+   ============================================ */
+
+/* DARK THEME */
+.vinavi-popup[data-theme="dark"],
+.vinavi-suggestions[data-theme="dark"] {
+  background: #161b22 !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-popup-header {
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-popup-body {
+  background: #161b22 !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-field-label {
+  color: #8b949e !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-field-input,
+.vinavi-popup[data-theme="dark"] .vinavi-field-select,
+.vinavi-popup[data-theme="dark"] .vinavi-field-textarea {
+  background: #21262d !important;
+  border-color: #30363d !important;
+  color: #e6edf3 !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-field-input:focus,
+.vinavi-popup[data-theme="dark"] .vinavi-field-select:focus,
+.vinavi-popup[data-theme="dark"] .vinavi-field-textarea:focus {
+  border-color: #58a6ff !important;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15) !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-popup-footer {
+  background: #0d1117 !important;
+  border-top-color: #30363d !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-btn-primary {
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-btn-secondary {
+  background: #21262d !important;
+  border-color: #30363d !important;
+  color: #8b949e !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-mainlabel-header {
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-mainlabel-section {
+  background: #0d1117 !important;
+  border-color: #30363d !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-multiselect-container {
+  background: #0d1117 !important;
+  border-color: #30363d !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-multiselect-option,
+.vinavi-popup[data-theme="dark"] .vinavi-checkbox-wrapper {
+  background: #21262d !important;
+  color: #e6edf3 !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-med-option {
+  background: #21262d !important;
+  border-color: #30363d !important;
+}
+
+.vinavi-popup[data-theme="dark"] .vinavi-med-text,
+.vinavi-popup[data-theme="dark"] .vinavi-checkbox-label,
+.vinavi-popup[data-theme="dark"] .vinavi-multiselect-label {
+  color: #e6edf3 !important;
+}
+
+.vinavi-suggestions[data-theme="dark"] .vinavi-suggestions-header {
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+}
+
+.vinavi-suggestions[data-theme="dark"] .vinavi-suggestion-item {
+  background: #161b22 !important;
+  color: #e6edf3 !important;
+  border-bottom-color: #30363d !important;
+}
+
+.vinavi-suggestions[data-theme="dark"] .vinavi-suggestion-item:hover {
+  background: #21262d !important;
+}
+
+.vinavi-suggestions[data-theme="dark"] .vinavi-suggestion-title {
+  color: #e6edf3 !important;
+}
+
+.vinavi-suggestions[data-theme="dark"] .vinavi-suggestion-shortcut {
+  color: #58a6ff !important;
+}
+
+/* REALISM THEME */
+.vinavi-popup[data-theme="realism"],
+.vinavi-suggestions[data-theme="realism"] {
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  box-shadow: 0 25px 60px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.1) !important;
+}
+
+.vinavi-popup[data-theme="realism"] .vinavi-popup-header {
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%) !important;
+}
+
+.vinavi-popup[data-theme="realism"] .vinavi-btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%) !important;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4) !important;
+}
+
+.vinavi-popup[data-theme="realism"] .vinavi-mainlabel-header {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+}
+
+.vinavi-popup[data-theme="realism"] .vinavi-field-input:focus,
+.vinavi-popup[data-theme="realism"] .vinavi-field-select:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+.vinavi-popup[data-theme="realism"] .vinavi-sublabel-text {
+  color: #6366f1 !important;
+}
+
+.vinavi-suggestions[data-theme="realism"] .vinavi-suggestions-header {
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%) !important;
+}
+
+/* WINDOWS CLASSIC THEME */
+.vinavi-popup[data-theme="win-classic"],
+.vinavi-suggestions[data-theme="win-classic"] {
+  background: #ece9d8 !important;
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: 2px 2px 0 #808080 !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-popup-header {
+  background: linear-gradient(180deg, #0a246a 0%, #0a246a 100%) !important;
+  border-radius: 0 !important;
+  padding: 4px 8px !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-popup-title {
+  font-size: 13px !important;
+  font-weight: bold !important;
+  text-shadow: none !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-popup-close {
+  background: #c0c0c0 !important;
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  color: #000 !important;
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-popup-body {
+  background: #ece9d8 !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-popup-footer {
+  background: #ece9d8 !important;
+  border-top: 1px solid #808080 !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-field-input,
+.vinavi-popup[data-theme="win-classic"] .vinavi-field-select,
+.vinavi-popup[data-theme="win-classic"] .vinavi-field-textarea {
+  border: 2px inset #808080 !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-btn {
+  border: 2px outset #ffffff !important;
+  border-radius: 0 !important;
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  padding: 6px 16px !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-btn-primary {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-btn:hover {
+  transform: none !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-btn:active {
+  border: 2px inset #808080 !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-mainlabel-header {
+  background: #0a246a !important;
+  border-radius: 0 !important;
+  padding: 6px 10px !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-mainlabel-section {
+  background: #ece9d8 !important;
+  border: 2px groove #ffffff !important;
+  border-radius: 0 !important;
+}
+
+.vinavi-popup[data-theme="win-classic"] .vinavi-multiselect-container,
+.vinavi-popup[data-theme="win-classic"] .vinavi-checkbox-wrapper {
+  background: #ece9d8 !important;
+  border: 1px solid #808080 !important;
+  border-radius: 0 !important;
+}
+
+.vinavi-suggestions[data-theme="win-classic"] .vinavi-suggestions-header {
+  background: #0a246a !important;
+  border-radius: 0 !important;
+}
+
+.vinavi-suggestions[data-theme="win-classic"] .vinavi-suggestion-item {
+  background: #ece9d8 !important;
+  border-bottom: 1px solid #808080 !important;
+}
+
+.vinavi-suggestions[data-theme="win-classic"] .vinavi-suggestion-item:hover {
+  background: #316ac5 !important;
+  color: white !important;
+}
+
+.vinavi-suggestions[data-theme="win-classic"] .vinavi-suggestion-item:hover .vinavi-suggestion-title,
+.vinavi-suggestions[data-theme="win-classic"] .vinavi-suggestion-item:hover .vinavi-suggestion-shortcut {
+  color: white !important;
+}
+
+/* WINDOWS MODERN (Win 11 Fluent) THEME */
+.vinavi-popup[data-theme="win-modern"],
+.vinavi-suggestions[data-theme="win-modern"] {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-popup-header {
+  background: #0078d4 !important;
+  border-radius: 7px 7px 0 0 !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-popup-body {
+  background: transparent !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-popup-footer {
+  background: rgba(243, 243, 243, 0.8) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-field-input,
+.vinavi-popup[data-theme="win-modern"] .vinavi-field-select,
+.vinavi-popup[data-theme="win-modern"] .vinavi-field-textarea {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid #d1d1d1 !important;
+  border-radius: 4px !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-field-input:focus,
+.vinavi-popup[data-theme="win-modern"] .vinavi-field-select:focus,
+.vinavi-popup[data-theme="win-modern"] .vinavi-field-textarea:focus {
+  border-color: #0078d4 !important;
+  border-bottom: 2px solid #0078d4 !important;
+  box-shadow: none !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-btn {
+  border-radius: 4px !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-btn-primary {
+  background: #0078d4 !important;
+  box-shadow: none !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-btn-primary:hover {
+  background: #106ebe !important;
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.3) !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-mainlabel-header {
+  background: #0078d4 !important;
+  border-radius: 6px !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-mainlabel-section {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 8px !important;
+}
+
+.vinavi-popup[data-theme="win-modern"] .vinavi-sublabel-text {
+  color: #0078d4 !important;
+}
+
+.vinavi-suggestions[data-theme="win-modern"] .vinavi-suggestions-header {
+  background: #0078d4 !important;
+}
+
+.vinavi-suggestions[data-theme="win-modern"] .vinavi-suggestion-item {
+  background: transparent !important;
+}
+
+.vinavi-suggestions[data-theme="win-modern"] .vinavi-suggestion-item:hover {
+  background: rgba(0, 120, 212, 0.1) !important;
+}
+
+/* OCEAN THEME */
+.vinavi-popup[data-theme="ocean"] .vinavi-popup-header {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%) !important;
+}
+
+.vinavi-popup[data-theme="ocean"] .vinavi-btn-primary {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%) !important;
+}
+
+.vinavi-popup[data-theme="ocean"] .vinavi-mainlabel-header {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%) !important;
+}
+
+.vinavi-popup[data-theme="ocean"] .vinavi-field-input:focus,
+.vinavi-popup[data-theme="ocean"] .vinavi-field-select:focus {
+  border-color: #0891b2 !important;
+}
+
+.vinavi-popup[data-theme="ocean"] .vinavi-sublabel-text {
+  color: #0891b2 !important;
+}
+
+.vinavi-suggestions[data-theme="ocean"] .vinavi-suggestions-header {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%) !important;
+}
+
+/* PURPLE THEME */
+.vinavi-popup[data-theme="purple"] .vinavi-popup-header {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+}
+
+.vinavi-popup[data-theme="purple"] .vinavi-btn-primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+}
+
+.vinavi-popup[data-theme="purple"] .vinavi-mainlabel-header {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+}
+
+.vinavi-popup[data-theme="purple"] .vinavi-field-input:focus,
+.vinavi-popup[data-theme="purple"] .vinavi-field-select:focus {
+  border-color: #7c3aed !important;
+}
+
+.vinavi-popup[data-theme="purple"] .vinavi-sublabel-text {
+  color: #7c3aed !important;
+}
+
+.vinavi-suggestions[data-theme="purple"] .vinavi-suggestions-header {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+}
+
+/* GREEN THEME */
+.vinavi-popup[data-theme="green"] .vinavi-popup-header {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+}
+
+.vinavi-popup[data-theme="green"] .vinavi-btn-primary {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+}
+
+.vinavi-popup[data-theme="green"] .vinavi-mainlabel-header {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+}
+
+.vinavi-popup[data-theme="green"] .vinavi-field-input:focus,
+.vinavi-popup[data-theme="green"] .vinavi-field-select:focus {
+  border-color: #059669 !important;
+}
+
+.vinavi-popup[data-theme="green"] .vinavi-sublabel-text {
+  color: #059669 !important;
+}
+
+.vinavi-suggestions[data-theme="green"] .vinavi-suggestions-header {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+}
